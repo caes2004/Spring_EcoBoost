@@ -1,0 +1,238 @@
+/* Header's font import */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+:root {
+
+    --letra-box: #446404;
+    --button-bg: #3b5704;
+
+    /*estilo olvide contraseña*/
+    --style-fg: white;
+    --style-fg-letters: #000000;
+}
+
+body {
+
+    height: 100vh;
+    font-family: "Quicksand", sans-serif;
+    background: linear-gradient(90deg, #3B5704 0%, #9EEF42 100%);
+
+}
+
+
+/* Contenedor con todo menos la imagen de la mascota*/
+.login-container {
+
+    height: 43.75em;
+    width: 40em;
+    margin: 2em auto;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+#mascotica {
+
+    width: 10%;
+    position: absolute;
+    top: 34%;
+    /* Posición de la mascota */
+    left: 22%;
+    /* Posición de la mascota */
+    padding-top: 2rem;
+
+}
+
+#Logo {
+
+    width: 33.5em;
+    justify-content: space-evenly;
+
+}
+
+.social-container {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.social-container-element {
+
+    width: 12.5rem;
+    height: 3.75rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    background: var(--style-fg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    position: relative; /* Usar position para ajustar */
+    top: -1.5em; /* Mueve este elemento hacia arriba */
+}
+
+
+.social-container-element img {
+
+    width: 1.875rem;
+    height: 1.875rem;
+    position: relative;
+    top: 0;
+    left: -0.625rem;
+}
+
+.social-container-element:hover {
+
+    background-color: #b3aeae;
+    cursor: pointer;
+}
+
+.data-login {
+
+    width: 85%;
+    height: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative; /* Cambia el margin por position */
+    top: -4em; /* Ajusta este valor para mover el contenedor hacia arriba */
+    align-items: center;
+
+}
+
+.input,
+.btn {
+
+    width: 90%;
+    height: 4.5em;
+    font-size: 1em;
+
+}
+
+.input {
+
+    padding-left: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight: 600;
+
+}
+
+.input:hover {
+
+    border: 2px solid black;
+
+}
+
+.input::placeholder {
+    color: var(--letra-box)
+}
+
+.btn {
+
+    width: 95%;
+    background-color: #80F43A;
+    border-radius: 24px;
+    border-color: white;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #fff; /* Color blanco al hacer clic */
+    cursor: pointer;
+    color: #3b5704;
+}
+
+.pregunta{
+
+    margin: 0;
+    color: var(--style-fg);
+    font-weight: 600;
+}
+
+.p{
+
+    color: var(--style-fg-letters);
+    font-weight: 600;
+}
+
+@media screen and (max-width:1300px ) {
+
+    #mascotica{
+
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:680px ) {
+
+    .login-container{
+
+        width: 80%;
+    }
+
+
+}
+@media screen and (max-width:635px ) {
+
+    #Logo{
+
+        width: 450px;
+
+    }
+
+}
+
+@media screen and (max-width:550px ) {
+
+    #Logo{
+
+        width: 95%;
+
+    }
+
+    .social-container{
+
+        flex-direction: column;
+        align-items: center;
+        height: 22%;
+
+    }
+
+}
+
+@media screen and (max-width:450px ) {
+
+
+    .data-login {
+
+        width: 100%;
+        height: 35%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative; /* Cambia el margin por position */
+        top: -10em; /* Ajusta este valor para mover el contenedor hacia arriba */
+    }
+
+    .input,
+    .btn,
+    .social-container-element {
+        margin-bottom: 1em; /* Añadir espacio adicional entre inputs y botones */
+    }
+
+    .social-container {
+        margin-bottom: 4em; /* Espacio entre botones sociales y el contenedor */
+    }
+
+}

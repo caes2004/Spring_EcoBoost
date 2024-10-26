@@ -1,0 +1,169 @@
+/* Estilo del fondo */
+body {
+    background: linear-gradient(90deg, #e4e4e4 0%, #c3ffae 100%);
+    font-family: 'Arial', sans-serif; /* Puedes personalizar la fuente aquí */
+
+}
+
+
+/* Estilo de la mascota */
+#mascotica_create {
+    width: 15%;
+    position: absolute;
+    top: 40%;
+    /* Posición de la mascota */
+    left: 73%;
+    /* Posición de la mascota */
+    padding-top: 2rem;
+}
+
+/* Estilo del logo */
+.Logo {
+
+    width: 46%;
+    top: -22%;
+    left: 27%;
+    position: absolute;
+    padding-top: 10rem;
+
+}
+
+
+/*
+width: 10%;
+position: absolute;
+top: 34%;
+/* Posición de la mascota */
+/* left: 22%; */
+/* Posición de la mascota */
+/* padding-top: 2rem; */
+
+
+/* Estilo del contenedor principal */
+.container {
+    margin-top: 180px !important; /* Aumentar el margen superior */
+    margin-bottom: 30px;
+    max-width: 600px; /* Limitar el ancho en pantallas grandes */
+    background-color: rgba(53, 90, 41, 0.85); /* Fondo con transparencia */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+
+/* Estilo para los encabezados */
+h1 {
+    font-size: 2rem; /* Tamaño del título */
+    font-weight: bold; /* Negrita */
+    color: #c9ffaa; /* Color blanco para el título */
+}
+
+/* Estilo de los labels */
+label {
+    font-size: 1rem; /* Tamaño del texto de los labels */
+    font-weight: 500; /* Peso medio del texto */
+    color: #333; /* Color del texto de los labels */
+}
+
+/* Estilo para los inputs */
+input.form-control {
+    background-color: #f9f9f9; /* Color de fondo claro para los inputs */
+    border: 1px solid #ccc; /* Borde gris suave */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    font-size: 1rem; /* Tamaño de fuente */
+    color: #333; /* Color del texto */
+}
+
+/* Estilo de los inputs en foco */
+input.form-control:focus {
+    border-color: #9EEF42; /* Color del borde en foco */
+    box-shadow: 0 0 5px rgba(158, 239, 66, 0.5); /* Efecto de foco */
+}
+
+/* Estilo de los radios */
+.form-check-input {
+    margin-right: 10px;
+}
+
+.form-check-label {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Estilo del botón */
+button.btn-success {
+    background-color:#aeff51; /* Verde oscuro para el botón */
+    border: none; /* Eliminar borde */
+    padding: 12px 20px; /* Espaciado interno */
+    font-size: 1.2rem; /* Tamaño de fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave en hover */
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button.btn-success:hover {
+    background-color: #3B5704; /* Verde más claro en hover */
+    color: #ffffff; /* Texto oscuro en hover */
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de los mensajes */
+.fontMiniMessages {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+@media screen and (max-width:1250px ) {
+
+    #mascotica_create{
+
+        display: none;
+    }
+
+    .Logo {
+
+        width: 46%;
+        top: -12%;
+        left: 27%;
+        position: absolute;
+        padding-top: 10rem;
+
+    }
+
+}
+
+@media screen and (max-width:1000px ) {
+
+    .Logo {
+
+        width: 60%;
+        top: -12%;
+        left: 20%;
+        position: absolute;
+        padding-top: 10rem;
+
+    }
+
+}
+
+@media screen and (max-width:600px ) {
+
+    .Logo {
+
+        width: 80%;
+        top: -12%;
+        left: 10%;
+        position: absolute;
+        padding-top: 10rem;
+
+    }
+
+    body{
+
+        padding: 4%;
+    }
+
+}

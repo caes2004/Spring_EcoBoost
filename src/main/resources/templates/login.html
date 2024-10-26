@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLogin 👤</title>
+    <link rel="stylesheet" href="/css/ecoLogin.css">
+</head>
+
+<body>
+
+<img id="mascotica" src="/images/login/PetEcotebanDefault.png" alt="Mascota">
+
+<div class="login-container">
+
+    <img class="Logo" src="/images/login/ecoLogoOriginal.png" alt="Logo EcoBoost">
+
+    <div class="social-container">
+        <div class="social-container-element">
+            <img src="/images/login/google.png" alt="Logo Google">
+            <span>Google</span>
+        </div>
+        <div class="social-container-element">
+            <img src="/images/login/facebook.png" alt="Logo Facebook">
+            <span>Facebook</span>
+        </div>
+    </div>
+
+    <div class="data-login">
+        <!-- Formularios de inicio de sesión -->
+        <form action="#" th:action="@{/login}" method="post">
+            <input type="text" name="userName" class="input fontHeaders" placeholder="Nombre Usuario" required>
+            <input type="password" name="password" class="input fontHeaders" placeholder="Contraseña" required>
+            <button class="btn" type="submit">INICIAR SESIÓN</button>
+
+            <!-- Mensaje de error si existe -->
+            <div th:if="${error}" class="error-message">
+                <span th:text="${error}"></span>
+            </div>
+
+            <div class="forgot">
+                <label class="pregunta">¿No tienes una cuenta?</label>
+                <a class="p" href="/create-user">¡Crear cuenta!</a>
+            </div>
+            <a class="p" href="#">¿Olvidaste tu contraseña?</a>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

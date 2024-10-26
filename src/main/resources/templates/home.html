@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoBoost 🍃</title>
+  <link rel="stylesheet" href="/css/ecoBoost.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+<!-- HEADER -->
+<div id="Header">
+  <a href="/login" class="user-link">
+    <img id="userIcon" src="/images/homepage/userIcon.png" alt="s">
+    <h1  id="userDefault" class="fontHeaders">
+      Usuario</h1>
+  </a>
+  <img id="ecoLogoHome" src="/images/homepage/EcoLogoSinLetra.png" alt="Logo EcoBoost">
+  <h1 id="textLogoHome" class="fontHeaders">ECOBOOST</h1>
+  <img id="homeSearch" src="/images/homepage/iconSearch.png" alt="Boton de Busqueda">
+  <img id="homeCart" src="/images/homepage/iconCart.png" alt="Carrito de Compras">
+</div>
+<!-- SLOGAN DE LA WEB -->
+<p id="miniMessage" class="fontMiniMessages"> " Impulsa ecologicamente tu calidad y economia " </p>
+<!-- TABLA DE TOP ECO USERS -->
+<div id="tableBoardest">
+  <!-- TABLA DE TOP -->
+  <table id="tableUsers">
+    <thead>
+    <tr>
+      <th id="titleTopEcoUsers" class="fontHeaders">Usuario</th>
+      <th id="titleTopEcoins" class="fontHeaders">Puntos</th>
+      <th id="titleTopDescuentos" class="fontHeaders">Descuento</th>
+      <th id="titleTopProductos" class="fontHeaders">Productos</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="fontHeaders">
+      <td>EstebanPro13</td>
+      <td>323</td>
+      <td>40%</td>
+      <td>23</td>
+    </tr>
+    <tr class="fontHeaders">
+      <td>JuanitoPro123</td>
+      <td>279</td>
+      <td>25%</td>
+      <td>18</td>
+    </tr>
+    <tr class="fontHeaders">
+      <td>Johnder_YTGaming</td>
+      <td>210</td>
+      <td>15%</td>
+      <td>13</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- H1 ANTES DEL CARRUSEL -->
+<h1 id="adDiscover" class="fontHeaders">¡CONOCE NUESTRA CATALOGO DE PRODUCTOS!</h1>
+<!-- CARRUSEL DEL HOME PAGE -->
+<div class="container mt-5">
+  <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <!-- Producto 1 -->
+      <div class="carousel-item active">
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="card">
+              <img src="productMetalLadyBird.jpeg" class="d-block w-100 carouselImg" alt="Producto 1">
+              <div class="card-body">
+                <h5 class="fontHeaders card-title">Mariquitas</h5>
+                <p class="fontMiniMessages card-text">Mariquitas hechas con tapas metalicas.<br>
+                  <strong>
+                    Material Metalico<br>
+                    1cm x 1cm <br>
+                    Unidades: 4<br>
+                    400$ x U
+                  </strong>
+                </p>
+                <a href="#" class="btn btn-success">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="carousel-item">
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="card">
+              <img src="productPlasticTree.jpeg" class="d-block w-100 carouselImg" alt="Arbol repisa">
+              <div class="card-body">
+                <h5 class="fontHeaders card-title">Árbol para Colgar</h5>
+                <p class="card-text">Árbol hecho de tapitas plasticas para colgar en pared.<br>
+                  <strong>
+                    Material Plastico<br>
+                    14cm x 14cm <br>
+                    Unidades: 7<br>
+                    9000$ x U
+                  </strong>
+                </p>
+                <a href="#" class="btn btn-success">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="carousel-item">
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <div class="card">
+              <img src="productCocaColaAirPlane.jpeg" class="d-block w-100 carouselImg" alt="Producto 3">
+              <div class="card-body">
+                <h5 class="card-title">Avioneta WW1</h5>
+                <p class="card-text">Avioneta de la WW1 Hecha con latas de gaseosa<br>
+                  <strong>
+                    Material Metalico<br>
+                    13cm x 9cm <br>
+                    Unidades: 11<br>
+                    5600$ x U <br>
+                  </strong>
+                </p>
+                <a href="#" class="btn btn-success">Ver más</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controles de anterior/siguiente -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon carousel-control-gray" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon carousel-control-gray" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+</div>
+
+<!-- Botones de categoria  -->
+<div>
+  <button class="buttonFormat fontHeaders">HOGAR</button>
+  <button class="buttonFormat fontHeaders">JUGUETES</button>
+  <button class="buttonFormat fontHeaders">ACCESORIOS</button>
+  <button class="buttonFormat fontHeaders">CONSTRUCCIÓN</button>
+</div>
+<!-- OHHHHH FEETSSSSS DAMN! -->
+<footer id="footerHome">
+  <div class="containerCol">
+    <h1 class="fontHeaders">CONTACTOS</h1>
+    <div>
+      <img id="iconGmail" src="/images/homepage/iconGmail.png">
+    </div>
+    <h4 class="fontTexts">ecoboost@gmail.com</h4>
+    <div>
+      <img id="iconWhatsapp" src="/images/homepage/iconWhatsapp.png">
+    </div>
+    <h4 class="fontTexts">320-835-0382</h4>
+
+  </div>
+  <div class="containerCol">
+    <h1 class="fontHeaders">¿QUIENES SOMOS?</h1>
+    <h6 class="fontTexts">Somos estudiantes enfocados en el área de desarrollo de software que buscamos
+      mediante una aplicación web incentivar al reciclaje, al cuidado del medio ambiente y generar interés en el
+      comercio de productos reciclables contribuyendo a la economía circular.
+    </h6>
+  </div>
+  <div class="containerCol">
+    <h1 class="fontHeaders">NUESTRAS REDES</h1>
+    <h4 class="fontTexts">Facebook</h4>
+    <h4 class="fontTexts">Instagram</h4>
+    <h4 class="fontTexts">TikTok</h4>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
