@@ -100,7 +100,7 @@ body {
     height: 55%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     position: relative; /* Cambia el margin por position */
     top: -4em; /* Ajusta este valor para mover el contenedor hacia arriba */
     align-items: center;

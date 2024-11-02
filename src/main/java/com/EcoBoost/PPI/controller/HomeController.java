@@ -3,6 +3,7 @@ package com.EcoBoost.PPI.controller;
 import com.EcoBoost.PPI.entity.Rol;
 import com.EcoBoost.PPI.entity.User;
 import com.EcoBoost.PPI.service.RolService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import com.EcoBoost.PPI.service.ProductService;
 import com.EcoBoost.PPI.service.UserService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /*
 Controlador para manejo de endpoints publicos
@@ -58,7 +60,7 @@ private RolService rolService;
 
         userService.save(user); // Guarda el usuario en la base de datos
 
-        return "redirect:/"; // Redirige a la página principal después de guardar
+        return "redirect:/login"; // Redirige a la página principal después de guardar
     }
     @GetMapping("/login")String login(){
 
@@ -69,15 +71,19 @@ private RolService rolService;
     @PostMapping("/login")
     public String validateLogin(@RequestParam("userName") String username,
                                 @RequestParam("password") String password,
-                                Model model) {
+                                Model model, HttpSession session) {
         User user = userService.findUserByUsernameAndPassword(username, password); // Usar el servicio
-
+        ;
         if (user != null) {
+            session.setAttribute("usuarioLogeado",user);
             // Verifica el rol del usuario y redirige a la página correspondiente
             if ("vendedor".equals(user.getRol().getNombre())) {
+
                 return "redirect:/vendedor/home";
             } else if ("comprador".equals(user.getRol().getNombre())) {
                 return "redirect:/comprador/home";
+
+
             } else {
                 model.addAttribute("error", "Rol desconocido");
                 return "pruebaError";

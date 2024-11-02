@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Venededor</title>
 </head>
 <body>
-<h1>HOLA VENDEDOR</h1>
+<h1>HOLA VENDEDOR<span th:text="${session.usuarioLogeado.nombre}">vendedor</span>! </h1>
+
+
 </body>
 </html>
