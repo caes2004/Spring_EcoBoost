@@ -1,0 +1,35 @@
+package com.EcoBoost.PPI.service;
+
+import com.EcoBoost.PPI.entity.Cart;
+import com.EcoBoost.PPI.repository.CartRepository;
+import jakarta.persistence.Id;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class CartService {
+    @Autowired
+    CartRepository cartRepository;
+
+    public List<Cart> listAll(Long idComprador) {
+        if (idComprador != null) {
+            return cartRepository.findAllByCompradorId(idComprador);
+        }
+        return cartRepository.findAll();
+    }
+
+    public void save(Cart cart) {
+        cartRepository.save(cart);
+    }
+
+    public Cart getCart(Long idComprador) {
+        return cartRepository.findByCompradorId(idComprador);
+    }
+
+    public void deleteCart(Long  id_comprador) {
+        cartRepository.deleteById(id_comprador);
+    }
+}
+
