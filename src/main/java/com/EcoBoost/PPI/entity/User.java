@@ -50,7 +50,7 @@ public class User {
         this.rol = rol;
     }
 
-    //Relacion bidirecional con la entidad producto que nos permite hacer el Crud de productos mediante el usurio
-    @OneToMany(mappedBy = "vendedor",cascade = CascadeType.ALL)
-    private List<Product>productos;
+    // Relación OneToMany con CarritoCompras
+    @OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> carritos;
 }

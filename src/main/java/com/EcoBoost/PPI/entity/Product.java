@@ -9,32 +9,36 @@ import java.util.List;
 @Table(name="productos")
 @Data
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_producto")
     private Long id;
 
-    @Column(nullable = false,  length = 60)
+    @Column(name="id_vendedor",nullable=true)
+    private String documentoVendedor;
+
+    @Column(name = "nombre_producto", nullable = false, length = 100)
     private String nombre_producto;
 
-    @Column(nullable = true, length = 60)
+    @Column(nullable = false)
+    private Double valor;
+
+    @Column(nullable = true)
     private String descripcion;
 
-    @Column(nullable = false,  length = 60)
-    private float valor;
+    @Column(name = "imagen_producto")
+    private String imagenProducto;
 
-    @Column(nullable = true, length = 60)
-    private String imagen;
-    //Relacion de muchos con la entidad usuario
+    @Column(name = "cantidad_stock", nullable = false)
+    private Integer cantidadStock;
+
     @ManyToOne
-    @JoinColumn(name = "vendedor_id")
-    private User vendedor;
+    @JoinColumn(name = "categoria_id")
+    private Category categoria;
 
-    @ManyToMany
-    @JoinTable(
-            name = "producto_categoria",
-            joinColumns = @JoinColumn(name = "producto_id"),
-            inverseJoinColumns = @JoinColumn(name = "categoria_id")
-    )
-    private List<Category> categories;
+    // Relación OneToMany con CarritoCompras (a través de la tabla intermedia)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cart> carritos;
 }
 

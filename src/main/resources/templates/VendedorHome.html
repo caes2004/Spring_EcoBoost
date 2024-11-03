@@ -2,11 +2,105 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Venededor</title>
+    <title>Panel de Vendedor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/baseUser.css">
 </head>
 <body>
-<h1>HOLA VENDEDOR<span th:text="${session.usuarioLogeado.nombre}">vendedor</span>! </h1>
+<div id="Header" class="d-flex align-items-center justify-content-between p-3">
+       <span class="user-link d-flex align-items-center">
+        <img id="userIcon" src="/images/homepage/userIcon.png" alt="Icono de Usuario" width="30" height="30">
+        <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
+    </span>
 
+    <img id="ecoLogoHome" src="/images/homepage/EcoLogoSinLetra.png" alt="Logo EcoBoost" width="50" height="50">
+    <h1 id="textLogoHome" class="fontHeaders">ECOBOOST</h1>
+    <div class="d-flex align-items-center">
+        <img id="homeSearch" src="/images/homepage/iconSearch.png" alt="Botón de Búsqueda" width="30" height="30" class="me-3">
+    </div>
+</div>
 
+<div id="inic">
+    <div class="container mt-12 text-end">
+        <a href="/logout" onclick="return confirmarLogOut()" class="btn btn-outline-danger">Log Out</a>
+    </div>
+
+    <div class="container mt-14">
+        <h1>Bienvenido, <span th:text="${session.usuarioLogeado.nombre}">Vendedor</span>!</h1>
+        <h1>Con Documento: <span th:text="${session.usuarioLogeado.documento}">Documento</span></h1>
+        <h2>Aquí podrás publicar tus artículos a la venta</h2>
+        <p>Realiza tus ventas de forma fácil y segura.</p>
+    </div>
+</div>
+
+<div id="form_product">
+    <div class="container mt-5">
+        <h2>Registrar Producto</h2>
+        <form action="/productos/guardar" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="nombre_producto" class="form-label">Nombre del Producto</label>
+                <input type="text" class="form-control" id="nombre_producto" name="nombre_producto" required maxlength="60">
+            </div>
+            <div class="mb-3">
+                <label for="descripcion" class="form-label">Descripción</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" maxlength="60"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="valor" class="form-label">Valor</label>
+                <input type="number" class="form-control" id="valor" name="valor" required step="0.01">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">Stock</span>
+                <input type="number" class="form-control" id="cantidadStock" name="cantidadStock" aria-label="Stock input" aria-describedby="inputGroup-sizing-default" min="0" placeholder="Ingrese cantidad en stock" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="imagenProducto" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="imagenProducto" name="imagenProducto" accept="image/*" required>
+            </div>
+            <div class="mb-3">
+                <label for="categoriaId" class="form-label">Categoría</label>
+                <select class="form-select" id="categoriaId" name="categoriaId" required>
+                    <option selected disabled>Selecciona una categoría</option>
+                    <option value="1">Accesorios</option>
+                    <option value="2">Construcción</option>
+                    <option value="3">Juguetes</option>
+                    <option value="4">Hogar</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar Producto</button>
+        </form>
+    </div>
+    <div id="btn_product">
+        <button class="btn btn-warning">Mis Productos</button>
+    </div>
+</div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita el envío inmediato para mostrar la alerta primero
+
+            // Realiza el envío del formulario
+            fetch(form.action, {
+                method: "POST",
+                body: new FormData(form)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Producto creado exitosamente.");
+                        form.reset(); // Limpia el formulario
+                    } else {
+                        alert("Hubo un error al crear el producto.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error al enviar el formulario:", error);
+                    alert("Hubo un error al crear el producto.");
+                });
+        });
+    });
+</script>
 </html>
