@@ -12,7 +12,7 @@ public class ProductService {
 
     @Autowired  ProductRepository productRepository;
 
-
+    //Listar por palabra clave del producto
     public List<Product> listAll(String palabraClave) {
 
         if (palabraClave != null){
@@ -21,7 +21,10 @@ public class ProductService {
 
         return productRepository.findAll();
     }
-
+    //Listar por documento del vendedor
+    public List<Product> findByDocumentoVendedor(String documentoVendedor) {
+        return productRepository.findByDocumentoVendedor(documentoVendedor);
+    }
     public void save(Product product) {
         productRepository.save(product);
     }

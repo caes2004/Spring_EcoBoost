@@ -1,5 +1,7 @@
 package com.EcoBoost.PPI.controller;
 
+import org.springframework.ui.Model;
+
 import com.EcoBoost.PPI.entity.Category;
 import com.EcoBoost.PPI.entity.Product;
 import com.EcoBoost.PPI.entity.User;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Controller
 
@@ -77,5 +80,20 @@ public class VendedorController {
         return "redirect:/vendedor/home";
     }
 
+
+    @GetMapping("/productos/mis-productos")
+    public String verMisProductos(HttpSession session, Model model) {
+        // Obtener el usuario en sesión
+        User usuarioLogeado = (User) session.getAttribute("usuarioLogeado");
+        String documentoVendedor = usuarioLogeado.getDocumento();
+
+        // Obtener los productos del usuario en sesión
+        List<Product> productos = productService.findByDocumentoVendedor(documentoVendedor);
+
+        // Pasar los productos al modelo
+        model.addAttribute("productos", productos);
+
+        return "mis-productos";
+    }
 
 }

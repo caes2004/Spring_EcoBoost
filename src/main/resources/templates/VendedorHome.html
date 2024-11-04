@@ -72,9 +72,11 @@
         </form>
     </div>
     <div id="btn_product">
-        <button class="btn btn-warning">Mis Productos</button>
+        <a class="btn btn-warning" th:href="@{/productos/mis-productos}">Mis Productos</a>
     </div>
+
 </div>
+
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -102,5 +104,10 @@
                 });
         });
     });
+</script>
+<script>
+    function confirmarLogOut() {
+        return confirm("¿Estás seguro de que deseas cerrar sesión?");
+    }
 </script>
 </html>

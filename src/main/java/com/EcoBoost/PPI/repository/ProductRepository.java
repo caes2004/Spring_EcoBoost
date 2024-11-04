@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE"
-            + " CONCAT(p.id, p.nombre_producto, p.descripcion, p.valor)"
+            + " CONCAT(p.id, p.nombre_producto,p.documentoVendedor, p.descripcion, p.valor)"
             + " LIKE %?1%")
     public List<Product> findAll(String palabraClave);
+
+    List<Product> findByDocumentoVendedor(String documentoVendedor);
 }
