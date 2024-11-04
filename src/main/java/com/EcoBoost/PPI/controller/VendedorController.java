@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -94,6 +95,57 @@ public class VendedorController {
         model.addAttribute("productos", productos);
 
         return "mis-productos";
+    }
+
+    // Mostrar formulario de edición
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioDeEdicion(@PathVariable("id") Long id, Model model) {
+        Product producto = productService.findById(id);
+        model.addAttribute("producto", producto);
+
+        // Agregar categorías para seleccionar en el formulario
+        List<Category> categorias = categoryService.listAll();
+        model.addAttribute("categorias", categorias);
+
+        return "editar_producto";
+    }
+
+    // Guardar cambios en el producto editado
+    @PostMapping("/editar/{id}")
+    public String actualizarProducto(@PathVariable("id") Long id,
+                                     @RequestParam("nombre_producto") String nombre,
+                                     @RequestParam("descripcion") String descripcion,
+                                     @RequestParam("valor") Double valor,
+                                     @RequestParam("imagenProducto") MultipartFile imagen,
+                                     @RequestParam("categoriaId") Long categoriaId,
+                                     @RequestParam("cantidadStock") int cantidadStock) throws IOException {
+
+        Product producto = productService.findById(id);
+        Category category = categoryService.findById(categoriaId);
+
+        producto.setNombre_producto(nombre);
+        producto.setDescripcion(descripcion);
+        producto.setCantidadStock(cantidadStock);
+        producto.setValor(valor);
+        producto.setCategoria(category);
+
+        if (!imagen.isEmpty()) {
+            String nombreImagen = imagen.getOriginalFilename();
+            Path rutaImagen = Paths.get("src//main//resources//static/uploads", nombreImagen);
+            Files.write(rutaImagen, imagen.getBytes());
+            producto.setImagenProducto(nombreImagen);
+        }
+
+        productService.save(producto);
+
+        return "redirect:/productos/mis-productos";
+    }
+
+    // Eliminar un producto
+    @GetMapping("/eliminar/{id}")
+    public String eliminarProducto(@PathVariable("id") Long id) {
+        productService.delete(id);
+        return "redirect:/productos/mis-productos";
     }
 
 }

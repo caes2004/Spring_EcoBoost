@@ -6,6 +6,8 @@ import com.EcoBoost.PPI.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
     @Autowired
@@ -21,6 +23,10 @@ public class CategoryService {
         return categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Categoria  no encontrada: " + id));
     }
 
+    // Método para obtener todas las categorías
+    public List<Category> listAll() {
+        return categoryRepository.findAll();
+    }
     public Category save(Category category) {
 
         return categoryRepository.save(category);

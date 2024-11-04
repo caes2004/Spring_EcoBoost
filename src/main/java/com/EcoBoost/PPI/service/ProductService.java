@@ -28,6 +28,13 @@ public class ProductService {
     public void save(Product product) {
         productRepository.save(product);
     }
+    //Buscar producto por ID
+
+    public Product findById(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado con ID: " + id));
+    }
+
 
     public Product get (Long id) {
 
