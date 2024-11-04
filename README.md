@@ -5,3 +5,13 @@ select * from roles; --Validar los roles, en la primera ejecución debería apar
 
 INSERT INTO roles (nombre) VALUES ('comprador');
 INSERT INTO roles (nombre) VALUES ('vendedor');
+
+Con los nuevos cambios se deben insertar manualmente las categorias realizando el procedimiento anteriormente descrito con el siguiente codigo SQL:
+
+select* from categorias;
+
+INSERT INTO categorias (categoria) VALUES ('Accesorios');
+INSERT INTO categorias (categoria) VALUES ('Construcción');
+INSERT INTO categorias (categoria) VALUES ('Juguetes');
+INSERT INTO categorias (categoria) VALUES ('Hogar');
+
