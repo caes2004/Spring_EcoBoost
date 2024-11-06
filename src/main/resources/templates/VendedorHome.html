@@ -13,6 +13,7 @@
         <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
     </span>
 
+
     <img id="ecoLogoHome" src="/images/homepage/EcoLogoSinLetra.png" alt="Logo EcoBoost" width="50" height="50">
     <h1 id="textLogoHome" class="fontHeaders">ECOBOOST</h1>
     <div class="d-flex align-items-center">
@@ -30,11 +31,15 @@
         <h1>Con Documento: <span th:text="${session.usuarioLogeado.documento}">Documento</span></h1>
         <h2>Aquí podrás publicar tus artículos a la venta</h2>
         <p>Realiza tus ventas de forma fácil y segura.</p>
+        <div id="btn_product">
+            <a class="btn btn-warning" th:href="@{/productos/mis-productos}">Mis Productos</a>
+        </div>
+        <img id="mascoticaVendedor" src="/images/login/mascota_2.png" alt="Mascota">
     </div>
 </div>
 
 <div id="form_product">
-    <div class="container mt-5">
+    <div class="containerForm mt-5">
         <h2>Registrar Producto</h2>
         <form action="/productos/guardar" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
@@ -70,9 +75,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Registrar Producto</button>
         </form>
-    </div>
-    <div id="btn_product">
-        <a class="btn btn-warning" th:href="@{/productos/mis-productos}">Mis Productos</a>
     </div>
 
 </div>
