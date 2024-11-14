@@ -40,5 +40,9 @@ public class Product {
     // Relación OneToMany con CarritoCompras (a través de la tabla intermedia)
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cart> carritos;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id") // Ajusta el nombre de la columna si es necesario
+    private User usuario;
 }
 

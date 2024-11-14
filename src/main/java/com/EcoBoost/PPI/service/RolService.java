@@ -4,6 +4,8 @@ import com.EcoBoost.PPI.repository.RolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RolService {
 
@@ -23,5 +25,8 @@ public class RolService {
     public Rol save(Rol rol) {
 
         return rolRepository.save(rol);
+    }
+    public List<Rol> listAll(){
+        return rolRepository.findAll();
     }
 }

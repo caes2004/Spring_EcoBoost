@@ -53,4 +53,7 @@ public class User {
     // Relación OneToMany con CarritoCompras
     @OneToMany(mappedBy = "comprador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cart> carritos;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> productos;
 }

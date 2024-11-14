@@ -41,7 +41,7 @@
         <div class="container mt-5">
             <h2>Lista de Productos</h2>
 
-            <form method="get" action="/productos" class="form-inline mb-4">
+            <form method="get" action="/comprador/home" class="form-inline mb-4">
                 <input type="text" name="palabraClave" class="form-control mr-2" placeholder="Buscar producto..." />
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
@@ -53,6 +53,7 @@
                         <div class="card-body">
                             <h5 class="card-title" th:text="${producto.nombre_producto}">Nombre Producto</h5>
                             <p class="card-text" th:text="${producto.descripcion}">Descripción</p>
+                            <p class="card-text"><strong>Stock disponible:</strong> <span th:text="${producto.cantidadStock}">0</span></p>
                             <p class="card-text"><strong>Precio:</strong> $<span th:text="${producto.valor}">0.00</span></p>
                             <form method="post" action="/comprador/agregar-al-carrito">
                                 <input type="hidden" name="productoId" th:value="${producto.id}" />

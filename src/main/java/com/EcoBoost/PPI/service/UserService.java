@@ -2,6 +2,7 @@ package com.EcoBoost.PPI.service;
 
 import com.EcoBoost.PPI.entity.User;
 import com.EcoBoost.PPI.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class UserService {
         return userRepository.findByNombreAndPassword(username, password);
     }
 
-
+    @Transactional
     public void delete(Long id) {
         if (userRepository.existsById(id)) {
             userRepository.deleteById(id);

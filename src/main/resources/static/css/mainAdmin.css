@@ -1,0 +1,5 @@
+.img-admin-size {
+    width: 80px;  /* Ajusta según tus necesidades */
+    height: auto;
+    object-fit: contain; /* Para asegurar que la imagen se ajuste sin distorsionarse */
+}
