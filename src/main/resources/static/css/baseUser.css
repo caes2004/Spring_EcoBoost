@@ -53,6 +53,20 @@
     color: white;
 }
 
+.mascoticaVendedor {
+
+    width: 12%;
+    position: absolute;
+    top: 17%;
+    left: 70%;
+    padding-top: 1rem;
+
+}
+
+.bienvenida{
+    background-color:  #c3ffae;
+
+}
 #userIcon {
     width: 55px;
     height: auto;
@@ -89,34 +103,13 @@
     margin-right: 15px;
 }
 
-/* Responsiveness */
-@media screen and (max-width: 1024px) {
-    #ecoLogoHome {
-        margin-left: 30%;
-    }
 
-    #textLogoHome {
-        font-size: 22px;
-    }
 
-    #homeSearch,
-    #homeCart {
-        width: 35px;
-        height: 35px;
-    }
-
-    #userIcon {
-        width: 45px;
-    }
-
-    #userDefault {
-        font-size: 16px;
-    }
-}
 #inic {
     margin-top: 8%;
     margin-left: 10%;
 }
+
 #mascoticaVendedor {
 
     width: 20%;
@@ -128,29 +121,20 @@
     padding-top: 2rem;
 
 }
-@media screen and (max-width:1300px ) {
 
-    #mascoticaVendedor{
-
-        display: none;
-    }
+#add_comprador{
+    margin-top: 7%;
+    margin-left: 48%;
 
 }
+#add_vendedor{
 
-/* Pantallas medianas (tablets) */
-@media (max-width: 768px) {
-    #inic {
-        margin-top: 5%; /* Reducir el margen superior */
-        margin-left: 5%; /* Reducir el margen izquierdo */
-    }
+
+    margin-left: 42%;
 }
+#btn_procePago{
 
-/* Pantallas pequeñas (teléfonos) */
-@media (max-width: 480px) {
-    #inic {
-        margin-top: 3%; /* Reducir aún más el margen superior */
-        margin-left: 2%; /* Reducir el margen izquierdo */
-    }
+    margin-left: 48%;
 }
 #btn_product {
 
@@ -161,45 +145,7 @@
     background: linear-gradient(90deg, #3B5704 0%, #9EEF42 100%);
     color:white;
 }
-@media screen and (max-width: 768px) {
-    #Header {
-        flex-wrap: wrap;
-        /* Permite que los elementos se alineen en varias filas si es necesario */
-        justify-content: center;
-        /* Centra el contenido en pantallas pequeñas */
-        padding: 10px 5px;
-    }
 
-    #ecoLogoHome {
-        margin-left: 10px;
-        /* Alinea el logo con el texto */
-        margin-right: 5px;
-        /* Espacio entre el logo y el texto */
-    }
-
-    #textLogoHome {
-        font-size: 20px;
-        margin-right: 0;
-        text-align: left;
-        /* Alinea el texto a la izquierda */
-        width: auto;
-    }
-
-    #homeSearch,
-    #homeCart {
-        width: 30px;
-        height: 30px;
-        margin-left: 10px;
-    }
-
-    #userIcon {
-        width: 40px;
-    }
-
-    #userDefault {
-        font-size: 14px;
-    }
-}
 .containerForm {
     margin-top: 100px;
     margin-bottom: 30px;
@@ -212,23 +158,8 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Pantallas medianas (tablets) */
-@media (max-width: 768px) {
-    .containerForm {
-        margin-top: 50px;
-        max-width: 80%;
-        padding: 15px;
-    }
-}
 
-/* Pantallas pequeñas (teléfonos) */
-@media (max-width: 480px) {
-    .containerForm {
-        margin-top: 30px;
-        max-width: 95%;
-        padding: 10px;
-    }
-}
+
 
 /* MiniMessages */
 #miniMessage {
@@ -238,13 +169,7 @@
     padding: 8px; /* Agrega padding para mejorar la legibilidad */
     color: #3b5704; /* Asegúrate de que el texto sea visible */
 }
-@media screen and (max-width: 768px) {
-    #miniMessage {
-        margin-top: 50%; /* Aumenta el margen superior para separarlo del encabezado */
-        font-size: 14px; /* Ajusta el tamaño de la fuente si es necesario */
-        padding: 1px;
-    }
-}
+
 /* Table */
 #tableBoardest {
     border-color: #3b5704;
@@ -282,18 +207,6 @@ th, td {
     color: white;
 }
 
-@media screen and (max-width: 768px) {
-    #tableBoardest {
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-
-    th,
-    td {
-        padding: 8px 4px;
-        font-size: 14px;
-    }
-}
 
 /* Discover */
 #adDiscover {
@@ -353,31 +266,6 @@ th, td {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-@media screen and (max-width: 1024px) {
-    .buttonFormat {
-        width: 30%;
-        font-size: 16px;
-        padding: 8px 16px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .buttonFormat {
-        width: 45%;
-        margin-left: 2%;
-        font-size: 14px;
-        padding: 6px 12px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .buttonFormat {
-        width: 90%;
-        margin-left: 0;
-        font-size: 12px;
-        padding: 5px 10px;
-    }
-}
 
 /* Footer */
 #footerHome {
@@ -398,8 +286,6 @@ th, td {
 }
 
 .containerCol {
-    margin-left: flex;
-    margin-right: flex;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -408,23 +294,6 @@ th, td {
 .fontTexts {
     font-size: 1.2em;
     margin: 0.5rem 0;
-}
-
-@media screen and (max-width: 768px) {
-    #footerHome {
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-    }
-
-    .containerCol {
-        margin: 20px 0;
-    }
-
-    #iconGmail,
-    #iconWhatsapp {
-        height: 1em;
-    }
 }
 
 body {
@@ -446,4 +315,67 @@ body {
 #mainContent {
     margin-top: 70px; /* Asegúrate de que este valor sea mayor que la altura de tu Header */
     padding: 20px; /* Espaciado alrededor del contenido */
+}
+
+#main_cart{
+
+    margin-top: 1em;
+}
+#my_products{
+    margin-top: 1em;
+}
+#add-product-btn{
+    position: relative;
+    right: 40%;
+}
+@media screen and (max-width:1100px ) {
+
+    .mascoticaVendedor{
+
+        display: none;
+    }
+
+    .bienvenida{
+        padding-top: 2rem;
+
+    }
+
+    #ecoLogoHome{
+
+        margin-left: 28%;
+
+    }
+
+}
+
+
+@media screen and (max-width:850px ) {
+    .btn-outline-danger {
+        width: 200%;
+
+    }
+/* Resppnsive boton añadir productos al carrito del comprador */
+    @media (max-width: 600px) {
+        #add_comprador {
+            margin-top: 50%;
+            margin-left: 5%;
+        }
+    }
+
+
+    @media (min-width: 601px) and (max-width: 1024px) {
+        #add_comprador {
+            margin-top: 30%;
+            margin-left: 20%;
+        }
+    }
+
+
+    @media (min-width: 1025px) {
+        #add_comprador {
+            margin-top: 28%;
+            margin-left: 40%;
+        }
+    }
+
 }

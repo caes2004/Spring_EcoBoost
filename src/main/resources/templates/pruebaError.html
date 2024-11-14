@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Error de Inicio de Sesión</title>
+    <link rel="stylesheet" href="/css/error.css">
 </head>
 <body>
-<h1>Errororrr hptaaa simio</h1>
+<!-- Ventana Modal de Error -->
+<div class="container-modal">
+    <div class="content-modal">
+        <h1>¡Woops!</h1>
+        <p>Ingresaste el usuario o contraseña <br> incorrectas, inténtalo de nuevo</p>
+        <button class="btn_modal" onclick="window.location.href='/login'">Aceptar</button>
+    </div>
+    <div class="container-mascota">
+        <img id="MascotaAlert" src="/images/mascota_alert.png" alt="Mascota Error">
+    </div>
+</div>
 </body>
 </html>

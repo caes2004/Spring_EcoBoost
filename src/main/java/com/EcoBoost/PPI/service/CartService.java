@@ -31,5 +31,12 @@ public class CartService {
     public void deleteCart(Long  id_comprador) {
         cartRepository.deleteById(id_comprador);
     }
+    public void eliminarCarrito(Long id) {
+        if (cartRepository.existsById(id)) {
+            cartRepository.deleteById(id);
+        } else {
+            throw new IllegalArgumentException("El carrito con el ID proporcionado no existe.");
+        }
+    }
 }
 

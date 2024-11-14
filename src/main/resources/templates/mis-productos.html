@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/css/baseUser.css">
 </head>
 <body>
+<div id="bienvenida">
     <div id="Header" class="d-flex align-items-center justify-content-between p-3">
            <span class="user-link d-flex align-items-center">
             <img id="userIcon" src="/images/homepage/userIcon.png" alt="Icono de Usuario" width="30" height="30">
@@ -29,29 +30,38 @@
 
     <div id="inic">
         <div class="container mt-12 text-end">
+
+            <a href="/vendedor/home" class="btn btn-light" id="add-product-btn">
+                <img src="/images/icons/add.jpg" alt="Añadir" style="width: 20px; height: 20px; margin-right: 8px;">
+                Añadir Producto
+            </a>
             <a href="/logout" onclick="return confirmarLogOut()" class="btn btn-outline-danger">Log Out</a>
         </div>
-    </div>
+        <div id="add_vendedor">
 
-    <div class="container mt-5">
-        <h2>Mis Productos</h2>
-        <div class="row">
-            <div th:each="producto : ${productos}" class="col-md-4 mb-4">
-                <div class="card">
-                    <img th:src="@{/uploads/{nombreImagen}(nombreImagen=${producto.imagenProducto})}"
-                         class="card-img-top" alt="Imagen del Producto"loading="lazy">
-                    <div class="card-body">
-                        <h5 class="card-title" th:text="${producto.nombre_producto}">Nombre Producto</h5>
-                        <p class="card-text" th:text="${producto.descripcion}">Descripción</p>
-                        <p class="card-text"><strong>Precio:</strong> $<span th:text="${producto.valor}">0.00</span></p>
-                        <a th:href="@{/editar/{id}(id=${producto.id})}" class="btn btn-primary">Editar</a>
-                        <a th:href="@{/eliminar/{id}(id=${producto.id})}" class="btn btn-danger">Eliminar</a>
+        </div>
+    </div>
+<div id="my_products">
+        <div class="container mt-5">
+            <h2>Mis Productos</h2>
+            <div class="row">
+                <div th:each="producto : ${productos}" class="col-md-4 mb-4">
+                    <div class="card">
+                        <img th:src="@{/uploads/{nombreImagen}(nombreImagen=${producto.imagenProducto})}"
+                             class="card-img-top" alt="Imagen del Producto"loading="lazy">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${producto.nombre_producto}">Nombre Producto</h5>
+                            <p class="card-text" th:text="${producto.descripcion}">Descripción</p>
+                            <p class="card-text"><strong>Precio:</strong> $<span th:text="${producto.valor}">0.00</span></p>
+                            <a th:href="@{/editar/{id}(id=${producto.id})}" class="btn btn-primary">Editar</a>
+                            <a th:href="@{/eliminar/{id}(id=${producto.id})}" class="btn btn-danger">Eliminar</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    </div>
     </body>
 <script>
     function confirmarLogOut() {
