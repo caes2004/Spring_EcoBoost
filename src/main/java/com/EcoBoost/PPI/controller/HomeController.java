@@ -62,6 +62,11 @@ private RolService rolService;
 
         return "redirect:/login"; // Redirige a la página principal después de guardar
     }
+    @GetMapping("/ecoVideo")String ecoVideo(){
+
+        return "video";
+    }
+
     @GetMapping("/login")String login(){
 
         return "login";

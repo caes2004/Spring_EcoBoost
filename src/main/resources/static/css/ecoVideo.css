@@ -1,0 +1,29 @@
+*{
+
+    margin: 0;
+    padding: 0;
+
+}
+
+
+.video_eco_boost{
+
+    width: 100%;
+    height: 100%;
+    padding: 0%;
+
+}
+
+.skip-message {
+    position: absolute;
+    bottom: 3%;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2em;
+    color: rgb(0, 0, 0);
+    font-family: Arial, sans-serif;
+    text-shadow: 1px 1px 2px rgb(255, 255, 255);
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}

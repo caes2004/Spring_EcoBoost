@@ -3,3 +3,13 @@
     height: auto;
     object-fit: contain; /* Para asegurar que la imagen se ajuste sin distorsionarse */
 }
+.thead-green {
+    background-color: green;
+    color: white; /* Para asegurar que el texto sea legible */
+}
+
+
+.thead-green2 {
+    background-color: green;
+    color: white; /* Para asegurar que el texto sea legible */
+}

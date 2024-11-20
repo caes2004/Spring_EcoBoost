@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida Eco Boost</title>
+    <link rel="stylesheet" href="/css/ecoVideo.css">
+</head>
+<body>
+
+<video class="video_eco_boost" autoplay loop>
+    <source src="/video/logoanimadoEB.mp4" type="video/mp4">
+</video>
+
+<div class="skip-message">Pulsa cualquier tecla para saltar</div>
+
+<script>
+
+    const video = document.querySelector('.video_eco_boost');
+    video.playbackRate = 0.7;
+
+
+    document.addEventListener('keydown', (event) => {
+        window.location.href = '/login';
+    });
+
+
+    video.addEventListener('ended', () => {
+        window.location.href = '/login';
+    });
+</script>
+
+</body>
+</html>
