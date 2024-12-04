@@ -24,7 +24,7 @@ public class CompradorController {
     @Autowired
     private CartService cartService;
     @GetMapping("/comprador/home")String compradorHome(@RequestParam(value = "palabraClave", required = false) String palabraClave, Model model) {
-        // Llamar al servicio para obtener la lista de productos
+
         List<Product> productos = productService.listAll(palabraClave);
 
         // Agregar la lista de productos al modelo
@@ -36,16 +36,16 @@ public class CompradorController {
     @PostMapping("/comprador/agregar-al-carrito")
     public String agregarAlCarrito(@RequestParam("productoId") Long productoId,
                                    @RequestParam("cantidad") Integer cantidad,
-                                   HttpSession session) {
-        // Recupera el comprador (User) de la sesión
+                                   HttpSession session, RedirectAttributes redirectAttributes) {
+
         User comprador = (User) session.getAttribute("usuarioLogeado");
 
 
-//        if (comprador == null) {
-//            return "redirect:/login"; // Redireccionar a la página de inicio de sesión si no está autenticado
-//        }
-
         Product producto = productService.findById(productoId);
+        if (cantidad > producto.getCantidadStock()) {
+            redirectAttributes.addFlashAttribute("error", "No puedes agregar más productos de los disponibles en stock.");
+            return "redirect:/comprador/home";
+        }
 
         Cart cartItem = new Cart();
         cartItem.setProducto(producto);
@@ -58,6 +58,7 @@ public class CompradorController {
         // Guardar en el carrito
         cartService.save(cartItem);
 
+        redirectAttributes.addFlashAttribute("success", "Producto agregado al carrito correctamente.");
         // Redireccionar a la página principal del comprador
         return "redirect:/comprador/home";
     }
