@@ -70,9 +70,13 @@ public class CompradorController {
         }
 
         List<Cart> carritos= cartService.listAll(comprador.getId());
+        double granTotal = carritos.stream()
+                .mapToDouble(cart -> cart.getProducto().getValor() * cart.getCantidadProducto())
+                .sum();
+        model.addAttribute("granTotal", granTotal);
         model.addAttribute("carritos", carritos);
 
-        return "verCarrito";  // Nombre de la vista (HTML) que muestra el carrito
+        return "verCarrito";
     }
 
     @PostMapping("/carrito/eliminar/{id}")
