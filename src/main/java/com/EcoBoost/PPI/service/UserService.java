@@ -1,6 +1,8 @@
 package com.EcoBoost.PPI.service;
 
+import com.EcoBoost.PPI.entity.Product;
 import com.EcoBoost.PPI.entity.User;
+import com.EcoBoost.PPI.repository.ProductRepository;
 import com.EcoBoost.PPI.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ProductService productService;
 
     public List<User> listAll() {
 
@@ -32,12 +36,14 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(Long id) {
-        if (userRepository.existsById(id)) {
-            userRepository.deleteById(id);
-        } else {
-            throw new RuntimeException("Usuario no encontrado con el id: " + id);
-        }
+    public void delete(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
+
+        for (Product product : user.getProductos()) {
+            productService.delete(product.getId());
+        }
+        userRepository.delete(user);
     }
 }

@@ -55,7 +55,7 @@ public class VendedorController {
         // Crear el producto con los datos del formulario
         Product producto = new Product();
         Category category = categoryService.findById(categoriaId);
-
+        producto.setUsuario(usuarioLogeado);
         producto.setNombre_producto(nombre);
         producto.setDescripcion(descripcion);
         producto.setCantidadStock(cantidadStock);

@@ -42,7 +42,7 @@ public class Product {
     private List<Cart> carritos;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id") // Ajusta el nombre de la columna si es necesario
+    @JoinColumn(name = "usuario_id")
     private User usuario;
 }
 
