@@ -48,6 +48,11 @@
         <li><a href="/comprador/home">Productos</a></li>
         <li><a href="#">Carrito</a></li>
         <li><a href="/editar">Perfil</a></li>
+        <li><div id="inic">
+            <div  class="container mt-12 text-end">
+                <a href="/logout" onclick="return confirmarLogOut()" class="btn btn-outline-danger">Log Out</a>
+            </div>
+        </div></li>
     </ul>
 </div>
 <div id="TituloCart">
@@ -124,7 +129,7 @@
 <!-- Botón para proceder al pago, después de mostrar todos los productos -->
 <div id="btn_procePago">
     <div class="mt-4">
-        <a href="#" class="btn btn-success">Proceder al Pago</a> <!-- Aquí el href está vacío, solo para simulación -->
+        <a href="/validar" class="btn btn-success">Proceder al Pago</a> <!-- Aquí el href está vacío, solo para simulación -->
     </div>
 </div>
 

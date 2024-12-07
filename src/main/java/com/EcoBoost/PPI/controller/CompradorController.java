@@ -96,17 +96,28 @@ public class CompradorController {
         }
         return "redirect:/comprador/carrito"; // Redirige a la página del carrito
     }
+    //Validar datos del comprador
+    @GetMapping("/validar")
+    public String validar(HttpSession session, Model model) {
 
+
+        User usuario = (User) session.getAttribute("usuarioLogeado");
+        if (usuario == null) {
+            throw new RuntimeException("No hay un usuario logeado en la sesión");
+        }
+        model.addAttribute("usuario", usuario);
+        return "validate";
+    }
     //Editar perfil de usuario en sesion
 
     @GetMapping("/editar")
     public String editar(HttpSession session, Model model) {
 
-        User comprador = (User) session.getAttribute("usuarioLogeado");
-        if (comprador == null) {
+        User usuario = (User) session.getAttribute("usuarioLogeado");
+        if (usuario == null) {
             throw new RuntimeException("No hay un usuario logeado en la sesión");
         }
-        model.addAttribute("comprador", comprador);
+        model.addAttribute("usuario", usuario);
         return "editar_usuario";
     }
 
@@ -132,6 +143,12 @@ public class CompradorController {
         usuarioLogeado.setFechaNacimiento(fechaNacimiento);
         usuarioLogeado.setDireccion(direccion);
         userService.save(usuarioLogeado);
-        return "redirect:/comprador/home";
+
+        String rol=usuarioLogeado.getRol().getNombre();
+        if ("comprador".equals(rol)) {
+            return "redirect:/comprador/home";
+        } else {
+            return "redirect:/vendedor/home";
+        }
     }
 }

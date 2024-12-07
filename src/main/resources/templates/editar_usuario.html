@@ -13,44 +13,44 @@
     <form th:action="@{/editar}" method="post" enctype="multipart/form-data">
         <div class="col-md-6">
             <label for="documento" class="form-label">Documento</label>
-            <input type="text" id="documento" name="documento" class="form-control bg-light" th:value="${comprador.documento}" readonly>
+            <input type="text" id="documento" name="documento" class="form-control bg-light" th:value="${usuario.documento}" readonly>
         </div>
 
 
         <div class="col-md-6">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" id="nombre" name="nombre" class="form-control" th:value="${comprador.nombre}" required>
+            <input type="text" id="nombre" name="nombre" class="form-control" th:value="${usuario.nombre}" required>
         </div>
 
         <div class="col-md-6">
             <label for="apellido" class="form-label">Apellido</label>
-            <input type="text" id="apellido" name="apellido" class="form-control" th:value="${comprador.apellido}" required>
+            <input type="text" id="apellido" name="apellido" class="form-control" th:value="${usuario.apellido}" required>
         </div>
 
         <!-- Contraseña -->
         <div class="col-md-6">
             <label for="password" class="form-label">Nueva Contraseña</label>
-            <input type="password" id="password" name="password" class="form-control">
+            <input type="password" id="password" name="password" class="form-control" th:value="${usuario.password}">
         </div>
 
         <div class="col-md-6">
             <label for="contacto" class="form-label">Contacto</label>
-            <input type="text" id="contacto" name="contacto" class="form-control" th:value="${comprador.contacto}" required>
+            <input type="text" id="contacto" name="contacto" class="form-control" th:value="${usuario.contacto}" required>
         </div>
 
         <div class="col-md-6">
             <label for="correo" class="form-label">Correo Electrónico</label>
-            <input type="email" id="correo" name="correo" class="form-control" th:value="${comprador.correo}" required>
+            <input type="email" id="correo" name="correo" class="form-control" th:value="${usuario.correo}" required>
         </div>
 
         <div class="col-md-6">
             <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" th:value="${comprador.fechaNacimiento}" required>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" th:value="${usuario.fechaNacimiento}" required>
         </div>
 
         <div class="col-md-6">
             <label for="direccion" class="form-label">Dirección</label>
-            <input type="text" id="direccion" name="direccion" class="form-control" th:value="${comprador.direccion}" required>
+            <input type="text" id="direccion" name="direccion" class="form-control" th:value="${usuario.direccion}" required>
         </div>
 
 

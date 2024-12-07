@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar Datos y Pago</title>
+    <!-- Agregar enlace a Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+        .form-container {
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 20px;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Formulario de validación de datos del usuario -->
+    <div class="form-container">
+        <h2 class="mb-4">Validar Datos de Usuario</h2>
+        <form id="userDataForm">
+            <div class="mb-3">
+                <label for="documento" class="form-label">Documento</label>
+                <!-- Mostrar el documento del usuario logeado -->
+                <input type="text" class="form-control" id="documento" name="documento" th:value="${usuario.documento}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <!-- Mostrar el nombre del usuario logeado -->
+                <input type="text" class="form-control" id="nombre" name="nombre" th:value="${usuario.nombre}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="correo" class="form-label">Correo Electrónico</label>
+                <!-- Mostrar el correo del usuario logeado -->
+                <input type="email" class="form-control" id="correo" name="correo" th:value="${usuario.correo}" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <!-- Mostrar el teléfono del usuario logeado -->
+                <input type="text" class="form-control" id="telefono" name="telefono" th:value="${usuario.contacto}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Dirección</label>
+                <!-- Mostrar el teléfono del usuario logeado -->
+                <input type="text" class="form-control" id="direccion" name="direccion" th:value="${usuario.direccion}" readonly>
+            </div>
+
+
+            <!-- Botones de acción -->
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-warning" id="editBtn">Editar Datos</button>
+                <button type="submit" class="btn btn-success">Confirmar y Continuar con la Compra</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Formulario de tarjeta de crédito (vacío) -->
+    <div class="form-container mt-4">
+        <h2 class="mb-4">Agregar Datos de la Tarjeta de Crédito</h2>
+        <form id="creditCardForm">
+            <div class="mb-3">
+                <label for="cardNumber" class="form-label">Número de Tarjeta</label>
+                <input type="text" class="form-control" id="cardNumber" name="cardNumber" placeholder="Ingrese el número de la tarjeta" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="expiryDate" class="form-label">Fecha de Expiración</label>
+                <input type="month" class="form-control" id="expiryDate" name="expiryDate" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="cvv" class="form-label">CVV</label>
+                <input type="text" class="form-control" id="cvv" name="cvv" placeholder="Ingrese el CVV" required>
+            </div>
+
+            <!-- Botón para continuar -->
+            <button type="submit" class="btn btn-primary">Guardar Tarjeta (No se guarda ahora)</button>
+        </form>
+    </div>
+
+    <!-- Mensaje de validación -->
+    <div id="validationMessage" class="alert alert-warning mt-4" style="display:none;">
+        <strong>¡Atención!</strong> Algunos de los datos ingresados son incorrectos. Por favor, verifique la información.
+    </div>
+</div>
+
+<!-- Agregar enlaces a los scripts de Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Validación de los datos del formulario de usuario
+    document.getElementById('userDataForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Simulación de validación de los datos (se puede ampliar según necesidades)
+        var valid = true;
+        var documento = document.getElementById('documento').value;
+        var nombre = document.getElementById('nombre').value;
+
+        if (!documento || !nombre) {
+            valid = false;
+        }
+
+        if (valid) {
+            window.location.href = "/comprador/home";  // Redirigir si todo es correcto
+        } else {
+            document.getElementById('validationMessage').style.display = 'block';
+        }
+    });
+
+    // Mostrar formulario de edición
+    document.getElementById('editBtn').addEventListener('click', function() {
+        // Redirigir a la página de edición del perfil (puedes cambiar la URL)
+        window.location.href = "/editar";
+    });
+
+    // Prevenir el envío del formulario de tarjeta (no se guarda por ahora)
+    document.getElementById('creditCardForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('La tarjeta de crédito no se guarda por ahora.');
+    });
+</script>
+</body>
+</html>

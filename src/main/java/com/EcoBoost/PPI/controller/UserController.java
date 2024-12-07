@@ -50,7 +50,7 @@ public class UserController {
         return "redirect:/login";
     }
 
-    //Falta el security para este endpoint
+
     @GetMapping("/path/admin")
     String mainAdmin(@RequestParam(value = "palabraClave", required = false) String palabraClave, Model model) {
 
@@ -62,7 +62,7 @@ public class UserController {
         return "mainAdmin";
     }
 
-    //Eliminar productos y usuarios.
+    //Eliminar productos y usuarios desde Administrador
     @GetMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
 
