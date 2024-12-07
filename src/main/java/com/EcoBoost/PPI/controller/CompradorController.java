@@ -2,9 +2,11 @@ package com.EcoBoost.PPI.controller;
 
 import com.EcoBoost.PPI.entity.Cart;
 import com.EcoBoost.PPI.entity.Product;
+import com.EcoBoost.PPI.entity.Rol;
 import com.EcoBoost.PPI.entity.User;
 import com.EcoBoost.PPI.service.CartService;
 import com.EcoBoost.PPI.service.ProductService;
+import com.EcoBoost.PPI.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -23,6 +26,9 @@ public class CompradorController {
     ProductService productService;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/comprador/home")String compradorHome(@RequestParam(value = "palabraClave", required = false) String palabraClave, Model model) {
 
         List<Product> productos = productService.listAll(palabraClave);
@@ -89,5 +95,43 @@ public class CompradorController {
             redirectAttributes.addFlashAttribute("error", "Hubo un problema al intentar eliminar el carrito.");
         }
         return "redirect:/comprador/carrito"; // Redirige a la página del carrito
+    }
+
+    //Editar perfil de usuario en sesion
+
+    @GetMapping("/editar")
+    public String editar(HttpSession session, Model model) {
+
+        User comprador = (User) session.getAttribute("usuarioLogeado");
+        if (comprador == null) {
+            throw new RuntimeException("No hay un usuario logeado en la sesión");
+        }
+        model.addAttribute("comprador", comprador);
+        return "editar_usuario";
+    }
+
+    @PostMapping("/editar")
+    public String updateUser(
+                             @RequestParam("documento") String documento,
+                             @RequestParam("nombre") String nombre,
+                             @RequestParam("apellido") String apellido,
+                             @RequestParam("password") String password,
+                             @RequestParam("contacto") String contacto,
+                             @RequestParam("correo") String correo,
+                             @RequestParam("fechaNacimiento") LocalDate fechaNacimiento,
+                             @RequestParam("direccion") String direccion,
+                             HttpSession session) {
+        User usuarioLogeado = (User) session.getAttribute("usuarioLogeado");
+
+        usuarioLogeado.setDocumento(documento);
+        usuarioLogeado.setNombre(nombre);
+        usuarioLogeado.setApellido(apellido);
+        usuarioLogeado.setPassword(password);
+        usuarioLogeado.setContacto(contacto);
+        usuarioLogeado.setCorreo(correo);
+        usuarioLogeado.setFechaNacimiento(fechaNacimiento);
+        usuarioLogeado.setDireccion(direccion);
+        userService.save(usuarioLogeado);
+        return "redirect:/comprador/home";
     }
 }
