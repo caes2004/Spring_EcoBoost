@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Compra Realizada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .link {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007BFF;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="factura">
+    <h1>¡Compra realizada con éxito!</h1>
+    <p><strong>Fecha de la compra:</strong> <span th:text="${sales.fecha}"></span></p>
+    <p><strong>Total de la compra:</strong> $<span th:text="${sales.total}"></span></p>
+
+    <h2>Productos comprados:</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Nombre del Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterar sobre los ítems de la venta -->
+        <tr th:each="carrito : ${sales.carrito}">
+            <td th:text="${carrito.producto.nombre_producto}"></td>
+            <td th:text="${carrito.cantidadProducto}"></td>
+            <td th:text="${carrito.producto.valor}"></td>
+            <!-- Subtotal por producto -->
+            <td th:text="${carrito.cantidadProducto * carrito.producto.valor}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Gracias por tu compra, <span th:text="${sales.usuario.nombre}"></span>!</h3>
+</div>
+
+<div class="button-container">
+    <button class="button" onclick="generatePDF()">Descargar PDF</button>
+    <a href="/" class="link" th:href="@{/comprador/home}">Volver al inicio</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+<script>
+    function generatePDF() {
+        const element = document.getElementById('factura');
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0];
+        html2pdf()
+            .from(element)
+            .save(`factura_${formattedDate}.pdf`);
+    }
+</script>
+</body>
+</html>

@@ -13,12 +13,14 @@ public class Cart {
     @Column(name = "id_carrito")
     private Long id;
 
-    // Relación ManyToOne con Usuario (comprador)
+
     @ManyToOne
     @JoinColumn(name = "id_comprador", nullable = false)
     private User comprador;
+    @ManyToOne
+    @JoinColumn(name = "sales_id")
+    private Sales sales;
 
-    // Relación ManyToOne con Producto
     @ManyToOne
     @JoinColumn(name = "id_producto", nullable = false)
     private Product producto;

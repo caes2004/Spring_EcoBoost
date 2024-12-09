@@ -1,12 +1,10 @@
-/* error.css */
-
 body, html {
     height: 100%;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro para toda la pantalla */
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .container-modal {
@@ -18,7 +16,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro con opacidad */
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .content-modal {
@@ -74,8 +72,85 @@ body, html {
 
 }
 
-#MascotaAlert {
+.MascotaAlert {
     width: 180px;
     height: auto;
+}
+@media screen and (max-width:2500px ) {
+
+    #MascotaAlert {
+        width: 180px;
+        height: auto;
+    }
+
+    .container-mascota {
+
+        right: 35%;
+
+    }
 
 }
+@media screen and (max-width:1200px ) {
+
+    .content-modal {
+
+        width: 50%;
+        height: 30%;
+
+    }
+    .container-mascota {
+
+
+        right: 33%;
+
+
+    }
+    #MascotaAlert {
+        width: 180px;
+        height: auto;
+    }
+
+}
+
+@media screen and (max-width:1130px ) {
+
+    .container-mascota {
+
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        position: absolute;
+        right: 28%;
+        margin: 0;
+
+    }
+
+    .content-modal {
+
+        width: 50%;
+        height: 32%;
+    }
+
+}
+
+@media screen and (max-width:800px ) {
+
+    .container-mascota {
+
+
+        right: 25%;
+
+
+    }
+
+    .content-modal {
+
+        width: 50%;
+        height: 50%;
+
+    }
+
+
+
+}
+

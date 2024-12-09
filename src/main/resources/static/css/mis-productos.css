@@ -1,0 +1,397 @@
+/* Header's font import*/
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+/* Header's font style*/
+.fontHeaders {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Info text's font import*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+/* Info text's font */
+.fontTexts {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* MiniMessages Font import */
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&display=swap');
+
+/* MiniMessages Font */
+.fontMiniMessages {
+    font-family: "Darker Grotesque", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+/* Header */
+#Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    background: linear-gradient(to right, #3b5704, #81b622);
+    padding: 10px;
+}
+
+/* Usuario a la izquierda */
+#Header a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+}
+
+.mascoticaVendedor {
+
+    width: 12%;
+    position: absolute;
+    top: 17%;
+    left: 70%;
+    padding-top: 1rem;
+
+}
+
+.bienvenida{
+    background-color:  #c3ffae;
+
+}
+#userIcon {
+    width: 55px;
+    height: auto;
+    margin-right: 10px;
+}
+
+#userDefault {
+    font-size: 18px;
+    margin: 0;
+}
+#TituloCart{
+
+    margin-top: 7%;
+    margin-left: 6%;
+
+}
+#btn_dFromCart{
+
+    margin-left:60% ;
+
+
+}
+
+/* Logo de la app */
+#ecoLogoHome {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    margin-left: 38%;
+}
+
+#textLogoHome {
+    font-size: 24px;
+    margin-right: auto;
+}
+
+/* Carrito y búsqueda */
+#homeSearch,
+#homeCart {
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+}
+
+#homeCart {
+    margin-right: 15px;
+}
+
+
+
+#inic {
+    margin-top: 15%;
+    margin-left: 10%;
+}
+
+#mascoticaVendedor {
+
+    width: 20%;
+    position: absolute;
+    top: 10%;
+    /* Posición de la mascota */
+    left: 65%;
+    /* Posición de la mascota */
+    padding-top: 2rem;
+
+}
+
+#add_comprador{
+
+
+    margin-left: 30%;
+
+}
+#add_vendedor{
+
+
+    margin-left: 42%;
+}
+#btn_procePago{
+
+    margin-left: 48%;
+    margin-top:5% ;
+}
+#btn_product {
+
+    margin-top: 0% ;
+    margin-left: 0%;
+}
+
+#form_product{
+    background: linear-gradient(90deg, #3B5704 0%, #9EEF42 100%);
+    color:white;
+}
+
+.containerForm {
+    margin-top: 100px;
+    margin-bottom: 30px;
+    margin-left: auto; /* Centrar horizontalmente */
+    margin-right: auto; /* Centrar horizontalmente */
+    max-width: 40%; /* Reducir el ancho para pantallas pequeñas */
+    background-color: rgba(53, 90, 41, 0.85);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Estilo para el sidebar */
+.sidebar {
+    position: fixed;
+    top: 7%;
+    right: -250px; /* Sidebar oculto fuera de la pantalla */
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(to right, #80b21e, #78a820);
+    color: white;
+    padding: 15px;
+    box-shadow: 2px 0 5px rgba(117, 208, 101, 0.2);
+    transition: right 0.3s ease;
+}
+
+/* Sidebar cuando está visible */
+.sidebar.show {
+    right: 0; /* Mover el sidebar a la vista */
+}
+.sidebar a {
+    color: white; /* Color de texto blanco */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    display: block; /* Para que el enlace ocupe todo el espacio disponible */
+    padding: 10px;
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+}
+
+/* Efecto hover para los enlaces */
+.sidebar a:hover {
+    background-color: #fcfcfc; /* Color de fondo cuando se pasa el cursor (azul) */
+    color: #090909; /* Asegura que el color del texto sea blanco */
+}
+
+/* MiniMessages */
+#miniMessage {
+    margin-top: 7.5%; /* Ajusta el margen superior para dar espacio */
+    text-align: center;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 8px; /* Agrega padding para mejorar la legibilidad */
+    color: #3b5704; /* Asegúrate de que el texto sea visible */
+}
+
+/* Table */
+#tableBoardest {
+    border-color: #3b5704;
+    border-radius: 13px;
+    background-color: #81b622;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-bottom: 1rem;
+    overflow-x: auto;
+}
+
+#tableUsers {
+    color: #c1ff72;
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+th, td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid #3b5704;
+}
+
+#titleTopEcoUsers, #titleTopEcoins, #titleTopDescuentos, #titleTopProductos {
+    color: #3b5704;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+#titleTopEcoUsers:hover, #titleTopEcoins:hover, #titleTopDescuentos:hover, #titleTopProductos:hover, tr:hover {
+    background-color: #3b5704;
+    color: white;
+}
+
+
+/* Discover */
+#adDiscover {
+    border-radius: 14px;
+    text-align: center;
+    color: #3b5704;
+    margin: 1.5% 10%;
+    background-color: #c1ff72;
+    padding: 1.5% 0;
+}
+
+
+.carousel-control-gray {
+    filter: brightness(0) saturate(100%) invert(0.5);
+}
+
+.carousel-inner {
+    border-radius: 21px;
+}
+
+.carouselImg {
+    border-radius: 21px;
+}
+
+.col-md-4 {
+    background-color: #3b5704;
+}
+
+/* Limitar el tamaño del carrusel */
+#productCarousel {
+    max-width: 900%;  /* Ajustar el tamaño para que coincida con las tarjetas originales */
+    margin: 0 auto;   /* Centrar el carrusel */
+}
+
+
+/* Categorías */
+.buttonFormat {
+    margin: 4% 2%;
+    border-radius: 14px;
+    border: 3px solid #3b5704;
+    background-color: #c1ff72;
+    color: #658f49;
+    text-align: center;
+    width: 20%;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buttonFormat:hover {
+    background-color: #fff;
+    color: #3b5704;
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Footer */
+#footerHome {
+    display: flex;
+    background-color: #c1ff72;
+    color: #3b5704;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+#iconGmail,
+#iconWhatsapp {
+    width: auto;
+    height: 1.2em;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.containerCol {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.fontTexts {
+    font-size: 1.2em;
+    margin: 0.5rem 0;
+}
+
+body {
+    margin: 0;
+    background-color: #fff;
+}
+/* Añade este bloque al final de tu CSS */
+#logoutButton {
+    position: absolute; /* Puedes cambiarlo a relative si prefieres */
+    top: 10px; /* Ajusta la posición según tus necesidades */
+    right: 10px; /* Ajusta la posición según tus necesidades */
+    background-color: #ff4d4d; /* Cambia el color de fondo como desees */
+    color: white; /* Color del texto */
+    padding: 10px 15px; /* Espaciado */
+    text-decoration: none; /* Sin subrayado */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+#mainContent {
+    margin-top: 70px; /* Asegúrate de que este valor sea mayor que la altura de tu Header */
+    padding: 20px; /* Espaciado alrededor del contenido */
+}
+
+#main_cart{
+
+    margin-top: 1em;
+}
+#my_products{
+    margin-top: 1em;
+}
+#add-product-btn{
+    position: relative;
+    right: 40%;
+}
+
+
+@media screen and (max-width: 1000px) {
+    #ecoLogoHome {
+        width: 40px;
+        margin-left: auto;
+
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #ecoLogoHome {
+        width: 40px;
+        margin-left: auto;
+    }
+
+    #inic {
+        top: 70px;
+        right: 10px;
+    }
+}
