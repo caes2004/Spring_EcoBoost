@@ -25,7 +25,9 @@
 <body>
 <div id="Header" class="d-flex align-items-center justify-content-between p-3">
         <span class="user-link d-flex align-items-center">
-            <img id="userIcon" src="/images/homepage/userIcon.png" alt="Icono de Usuario" width="30" height="30">
+           <a href="/perfil">
+        <img id="userIcon" src="/images/homepage/userIcon.png" alt="Icono de Usuario" width="30" height="30">
+       </a>
             <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
         </span>
 
@@ -47,7 +49,7 @@
 
         <li><a href="/comprador/home">Productos</a></li>
         <li><a href="#">Carrito</a></li>
-        <li><a href="/editar">Perfil</a></li>
+        <li><a href="/perfil">Perfil</a></li>
         <li><div id="inic">
             <div  class="container mt-12 text-end">
                 <a href="/logout" onclick="return confirmarLogOut()" class="btn btn-outline-danger">Log Out</a>

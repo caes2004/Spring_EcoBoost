@@ -29,10 +29,10 @@ public class CompradorController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/comprador/home")String compradorHome(@RequestParam(value = "palabraClave", required = false) String palabraClave, Model model) {
+    @GetMapping("/comprador/home")String compradorHome(@RequestParam(value = "palabraClave", required = false) String palabraClave, Model model,HttpSession session) {
 
         List<Product> productos = productService.listAll(palabraClave);
-
+        User user= (User) session.getAttribute("user");
         // Agregar la lista de productos al modelo
         model.addAttribute("productos", productos);
 
@@ -108,47 +108,5 @@ public class CompradorController {
         model.addAttribute("usuario", usuario);
         return "validate";
     }
-    //Editar perfil de usuario en sesion
 
-    @GetMapping("/editar")
-    public String editar(HttpSession session, Model model) {
-
-        User usuario = (User) session.getAttribute("usuarioLogeado");
-        if (usuario == null) {
-            throw new RuntimeException("No hay un usuario logeado en la sesión");
-        }
-        model.addAttribute("usuario", usuario);
-        return "editar_usuario";
-    }
-
-    @PostMapping("/editar")
-    public String updateUser(
-                             @RequestParam("documento") String documento,
-                             @RequestParam("nombre") String nombre,
-                             @RequestParam("apellido") String apellido,
-                             @RequestParam("password") String password,
-                             @RequestParam("contacto") String contacto,
-                             @RequestParam("correo") String correo,
-                             @RequestParam("fechaNacimiento") LocalDate fechaNacimiento,
-                             @RequestParam("direccion") String direccion,
-                             HttpSession session) {
-        User usuarioLogeado = (User) session.getAttribute("usuarioLogeado");
-
-        usuarioLogeado.setDocumento(documento);
-        usuarioLogeado.setNombre(nombre);
-        usuarioLogeado.setApellido(apellido);
-        usuarioLogeado.setPassword(password);
-        usuarioLogeado.setContacto(contacto);
-        usuarioLogeado.setCorreo(correo);
-        usuarioLogeado.setFechaNacimiento(fechaNacimiento);
-        usuarioLogeado.setDireccion(direccion);
-        userService.save(usuarioLogeado);
-
-        String rol=usuarioLogeado.getRol().getNombre();
-        if ("comprador".equals(rol)) {
-            return "redirect:/comprador/home";
-        } else {
-            return "redirect:/vendedor/home";
-        }
-    }
 }

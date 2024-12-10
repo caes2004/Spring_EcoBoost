@@ -13,7 +13,9 @@
 <!-- HEADER -->
     <div id="Header" class="d-flex align-items-center justify-content-between p-3">
        <span class="user-link d-flex align-items-center">
+        <a href="/perfil">
         <img id="userIcon" src="/images/homepage/userIcon.png" alt="Icono de Usuario" width="30" height="30">
+       </a>
         <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
     </span>
 

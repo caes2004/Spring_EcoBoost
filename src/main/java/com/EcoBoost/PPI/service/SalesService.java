@@ -46,7 +46,7 @@ public class SalesService {
             sales.setUsuario(user);
             sales.setFecha(LocalDate.now());
 
-
+            int totalEcoPoints = 0;
             double total = 0;
             for (Cart cart : carritos) {
                 total += cart.getCantidadProducto() * cart.getProducto().getValor();
@@ -61,16 +61,15 @@ public class SalesService {
                     throw new IllegalArgumentException("No hay suficiente stock para el producto: " + producto.getNombre_producto());
                 }
 
-
+                totalEcoPoints += cantidadProducto;
                 producto.setCantidadStock(producto.getCantidadStock() - cantidadProducto);
-
-
                 productRepository.save(producto);
             }
             sales.setTotal(total);
             sales.setCarrito(carritos);
             salesRepository.save(sales);
-
+            user.setEcoPoints(user.getEcoPoints() + totalEcoPoints);
+            userRepository.save(user);
 
 
             cartRepository.deleteByCompradorId(userID);

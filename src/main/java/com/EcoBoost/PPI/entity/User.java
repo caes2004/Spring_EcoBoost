@@ -39,6 +39,9 @@ public class User {
     @Column(nullable = false, length = 100)
     private String direccion;
 
+    @Column(nullable = true, length = 60)
+    private Integer EcoPoints=0;
+
     @ManyToOne
     @JoinColumn(name = "rol_id")
     private Rol rol;
