@@ -18,4 +18,8 @@ public class Rol {
 
     @Column(nullable = false, unique = true)
     private String nombre;
+
+    public Rol(String nombre) {
+        this.nombre = nombre;
+    }
 }
