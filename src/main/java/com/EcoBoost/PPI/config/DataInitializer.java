@@ -6,6 +6,8 @@ import com.EcoBoost.PPI.repository.CategoryRepository;
 import com.EcoBoost.PPI.repository.RolRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -15,9 +17,11 @@ public class DataInitializer implements CommandLineRunner {
     private final RolRepository rolRepository;
     private final CategoryRepository categoryRepository;
 
+
     public DataInitializer(RolRepository rolRepository, CategoryRepository categoryRepository) {
         this.rolRepository = rolRepository;
         this.categoryRepository = categoryRepository;
+
     }
 
     @Override
@@ -27,6 +31,9 @@ public class DataInitializer implements CommandLineRunner {
         rolInit();
         categroriasInit();
 
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = passwordEncoder.encode("12345");
+        System.out.println("Admin Password: " + password);
 
     }
         private void rolInit(){
