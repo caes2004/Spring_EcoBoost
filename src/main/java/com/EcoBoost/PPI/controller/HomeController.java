@@ -74,10 +74,10 @@ private RolService rolService;
 
 
     @PostMapping("/login")
-    public String validateLogin(@RequestParam("userName") String username,
+    public String validateLogin(@RequestParam("document") String document,
                                 @RequestParam("password") String password,
                                 Model model, HttpSession session) {
-        User user = userService.findUserByUsernameAndPassword(username, password); // Usar el servicio
+        User user = userService.authUser(document, password); // Usar el servicio
         ;
         if (user != null) {
             session.setAttribute("usuarioLogeado",user);

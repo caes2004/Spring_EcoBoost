@@ -10,6 +10,7 @@ import com.EcoBoost.PPI.service.RolService;
 import com.EcoBoost.PPI.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,9 @@ public class UserController {
     private RolService rolService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     public UserController(ProductService productService, UserService userService) {
         this.productService = productService;
@@ -104,6 +108,7 @@ public class UserController {
         user.setDocumento(documento);
         user.setNombre(nombre);
         user.setApellido(apellido);
+        passwordEncoder.encode(password);
         user.setPassword(password);
         user.setContacto(contacto);
         user.setCorreo(correo);

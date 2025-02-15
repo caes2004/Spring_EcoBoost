@@ -6,6 +6,7 @@ import com.EcoBoost.PPI.repository.ProductRepository;
 import com.EcoBoost.PPI.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<User> listAll() {
 
@@ -23,6 +26,7 @@ public class UserService {
     }
 
     public void save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -31,8 +35,15 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con el id: " + id));
     }
 
-    public User findUserByUsernameAndPassword(String username, String password) {
-        return userRepository.findByNombreAndPassword(username, password);
+    public User authUser(String document, String password) {
+        User user = userRepository.findByDocumento(document);
+        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+
+            return user;
+
+        }else {
+            return null;
+        }
     }
 
     @Transactional
