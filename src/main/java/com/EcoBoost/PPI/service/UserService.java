@@ -2,7 +2,6 @@ package com.EcoBoost.PPI.service;
 
 import com.EcoBoost.PPI.entity.Product;
 import com.EcoBoost.PPI.entity.User;
-import com.EcoBoost.PPI.repository.ProductRepository;
 import com.EcoBoost.PPI.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,21 @@ public class UserService {
     }
 
     public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User userExists = userRepository.findByDocumento(user.getDocumento());
+        if (userExists != null) {  // Usuario ya existe
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                user.setPassword(userExists.getPassword()); // Mantiene la contraseña anterior
+            } else {
+                user.setPassword(passwordEncoder.encode(user.getPassword())); // Encripta la nueva
+            }
+        } else {
+            // Usuario nuevo, asegurarse de que la contraseña no sea null antes de encriptar
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                throw new IllegalArgumentException("La contraseña no puede estar vacía.");
+            }
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
         userRepository.save(user);
     }
 

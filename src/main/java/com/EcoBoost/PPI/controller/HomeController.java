@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /*
 Controlador para manejo de endpoints publicos
@@ -78,7 +77,6 @@ private RolService rolService;
                                 @RequestParam("password") String password,
                                 Model model, HttpSession session) {
         User user = userService.authUser(document, password); // Usar el servicio
-        ;
         if (user != null) {
             session.setAttribute("usuarioLogeado",user);
             // Verifica el rol del usuario y redirige a la página correspondiente

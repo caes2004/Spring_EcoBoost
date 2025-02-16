@@ -25,7 +25,7 @@ public class User {
     private String apellido;
 
     @Column(nullable = false, length = 60)
-    private String password;
+    private String password ="";
 
     @Column(nullable = false, length = 60)
     private String contacto;

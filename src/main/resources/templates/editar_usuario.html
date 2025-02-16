@@ -10,54 +10,56 @@
 <div class="container mt-5">
     <h2>Editar Perfil</h2>
 
-    <form th:action="@{/editar}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/editar}" method="post"  th:object="${usuarioForm}" enctype="multipart/form-data">
         <div class="col-md-6">
             <label for="documento" class="form-label">Documento</label>
-            <input type="text" id="documento" name="documento" class="form-control bg-light" th:value="${usuario.documento}" readonly>
+            <input type="text" id="documento" name="documento" class="form-control bg-light" th:value="${usuarioForm.documento}" readonly>
         </div>
 
 
         <div class="col-md-6">
             <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" id="nombre" name="nombre" class="form-control" th:value="${usuario.nombre}" required>
+            <input type="text" id="nombre" name="nombre" class="form-control" th:value="${usuarioForm.nombre}" required>
         </div>
 
         <div class="col-md-6">
             <label for="apellido" class="form-label">Apellido</label>
-            <input type="text" id="apellido" name="apellido" class="form-control" th:value="${usuario.apellido}" required>
+            <input type="text" id="apellido" name="apellido" class="form-control" th:value="${usuarioForm.apellido}" required>
         </div>
 
         <!-- Contraseña -->
         <div class="col-md-6">
-            <label for="password" class="form-label">Nueva Contraseña</label>
-            <input type="password" id="password" name="password" class="form-control" th:value="${usuario.password}">
+            <label for="password" class="form-label">Nueva Contraseña <strong>(Déjala vacía si no quieres cambiarla)</strong></label>
+            <input type="password" id="password" th:field="*{password}" class="form-control">
         </div>
 
         <div class="col-md-6">
             <label for="contacto" class="form-label">Contacto</label>
-            <input type="text" id="contacto" name="contacto" class="form-control" th:value="${usuario.contacto}" required>
+            <input type="text" id="contacto" name="contacto" class="form-control" th:value="${usuarioForm.contacto}" required>
         </div>
 
         <div class="col-md-6">
             <label for="correo" class="form-label">Correo Electrónico</label>
-            <input type="email" id="correo" name="correo" class="form-control" th:value="${usuario.correo}" required>
+            <input type="email" id="correo" name="correo" class="form-control" th:value="${usuarioForm.correo}" required>
         </div>
 
         <div class="col-md-6">
             <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" th:value="${usuario.fechaNacimiento}" required>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" th:value="${usuarioForm.fechaNacimiento}" required>
         </div>
 
         <div class="col-md-6">
             <label for="direccion" class="form-label">Dirección</label>
-            <input type="text" id="direccion" name="direccion" class="form-control" th:value="${usuario.direccion}" required>
+            <input type="text" id="direccion" name="direccion" class="form-control" th:value="${usuarioForm.direccion}" required>
         </div>
 
 
 
         <!-- Botones de acción -->
         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        <a th:href="@{/comprador/home}" class="btn btn-secondary">Cancelar</a>
+        <<form th:action="@{${usuarioForm.rol == 'comprador' ? '/comprador/home' : '/vendedor/home'}}" method="get">
+            <button type="submit" class="btn btn-primary">Ir a tu Página</button>
+        </form>
     </form>
 </div>
 

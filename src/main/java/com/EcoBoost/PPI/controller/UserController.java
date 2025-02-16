@@ -10,13 +10,9 @@ import com.EcoBoost.PPI.service.RolService;
 import com.EcoBoost.PPI.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -37,8 +33,7 @@ public class UserController {
     private RolService rolService;
     @Autowired
     private CategoryService categoryService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
 
 
     public UserController(ProductService productService, UserService userService) {
@@ -108,7 +103,6 @@ public class UserController {
         user.setDocumento(documento);
         user.setNombre(nombre);
         user.setApellido(apellido);
-        passwordEncoder.encode(password);
         user.setPassword(password);
         user.setContacto(contacto);
         user.setCorreo(correo);
@@ -180,38 +174,28 @@ public class UserController {
         if (usuario == null) {
             throw new RuntimeException("No hay un usuario logeado en la sesión");
         }
-        model.addAttribute("usuario", usuario);
+        model.addAttribute("usuarioForm", usuario);
         return "editar_usuario";
     }
 
     @PostMapping("/editar")
-    public String updateUser(
-            @RequestParam("documento") String documento,
-            @RequestParam("nombre") String nombre,
-            @RequestParam("apellido") String apellido,
-            @RequestParam("password") String password,
-            @RequestParam("contacto") String contacto,
-            @RequestParam("correo") String correo,
-            @RequestParam("fechaNacimiento") LocalDate fechaNacimiento,
-            @RequestParam("direccion") String direccion,
-            HttpSession session) {
+    public String updateUser(@ModelAttribute User usuarioForm, HttpSession session) {
         User usuarioLogeado = (User) session.getAttribute("usuarioLogeado");
 
-        usuarioLogeado.setDocumento(documento);
-        usuarioLogeado.setNombre(nombre);
-        usuarioLogeado.setApellido(apellido);
-        usuarioLogeado.setPassword(password);
-        usuarioLogeado.setContacto(contacto);
-        usuarioLogeado.setCorreo(correo);
-        usuarioLogeado.setFechaNacimiento(fechaNacimiento);
-        usuarioLogeado.setDireccion(direccion);
+
+        usuarioLogeado.setPassword(usuarioForm.getPassword());
+        usuarioLogeado.setDocumento(usuarioForm.getDocumento());
+        usuarioLogeado.setNombre(usuarioForm.getNombre());
+        usuarioLogeado.setApellido(usuarioForm.getApellido());
+        usuarioLogeado.setContacto(usuarioForm.getContacto());
+        usuarioLogeado.setCorreo(usuarioForm.getCorreo());
+        usuarioLogeado.setFechaNacimiento(usuarioForm.getFechaNacimiento());
+        usuarioLogeado.setDireccion(usuarioForm.getDireccion());
+
         userService.save(usuarioLogeado);
 
-        String rol=usuarioLogeado.getRol().getNombre();
-        if ("comprador".equals(rol)) {
-            return "redirect:/comprador/home";
-        } else {
-            return "redirect:/vendedor/home";
-        }
+        String rol = usuarioLogeado.getRol().getNombre();
+        return "comprador".equals(rol) ? "redirect:/comprador/home" : "redirect:/vendedor/home";
     }
+
 }

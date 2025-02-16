@@ -53,6 +53,7 @@
                              class="card-img-top" alt="Imagen del Producto"loading="lazy">
                         <div class="card-body">
                             <h5 class="card-title" th:text="${producto.nombre_producto}">Nombre Producto</h5>
+                            <p class="card-text"><strong>Stock:</strong> <span th:text="${producto.cantidadStock}">0.00</span></p>
                             <p class="card-text" th:text="${producto.descripcion}">Descripción</p>
                             <p class="card-text"><strong>Precio:</strong> $<span th:text="${producto.valor}">0.00</span></p>
                             <a th:href="@{/editar/{id}(id=${producto.id})}" class="btn btn-primary">Editar</a>

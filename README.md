@@ -35,17 +35,17 @@ potenciales usuarios y en diferentes dispositivos.
 
 ### Imagenes de la aplicación web:
 #### 🔹HomePage
-![HomePage](homePage1.png)
+![HomePage](ProyectImages/homePage1.png)
 
 #### 🔹Registro  
-![registro](registro.png)
+![registro](ProyectImages/registro.png)
 #### 🔹Login
-![login.png](login.png)
+![login.png](ProyectImages/login.png)
 #### 🔹Panel de vendedor
-![vendedor.png](vendedor.png)
+![vendedor.png](ProyectImages/vendedor.png)
 #### 🔹Carrito de comprador
-![img.png](carrito.png)
+![img.png](ProyectImages/carrito.png)
 #### 🔹Factura
-![img.png](factura.png)
+![img.png](ProyectImages/factura.png)
 #### 🔹Perfil de usuario
-![img.png](perfil.png)
+![img.png](ProyectImages/perfil.png)
