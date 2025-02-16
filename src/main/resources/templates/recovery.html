@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="Data-recovery">
+        <h1>Recuperar contraseña</h1>
+        <form action="#" th:action="@{/recovery}" method="post">
+            <input type="text" name="document" placeholder="Documento" required>
+            <input type="email" name="email" placeholder="Correo electrónico" required>
+            <input type="password" name="password" placeholder="Nueva contraseña" required>
+            <button type="submit">Recuperar</button>
+            <div th:if="${mensaje}" class="alert alert-success">
+                <p th:text="${mensaje}"></p>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

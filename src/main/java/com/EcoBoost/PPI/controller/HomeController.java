@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /*
 Controlador para manejo de endpoints publicos
@@ -96,6 +97,24 @@ private RolService rolService;
             model.addAttribute("error", "Usuario o contraseña incorrectos");
             return "pruebaError";
         }
+    }
+    @GetMapping("/recovery")String recovery(){
+
+        return "recovery";
+    }
+    @PostMapping("/recovery")
+    public String recoveryPassword(@RequestParam("document") String document,
+                                   @RequestParam("email") String email,
+                                   @RequestParam("password") String password,
+                                   Model model, RedirectAttributes redirectAttributes) {
+        if (userService.recoveryPassword(document, email, password)) {
+
+            redirectAttributes.addFlashAttribute("mensaje", "Contraseña actualizada con éxito");
+        } else {
+            model.addAttribute("error", "Usuario no encontrado o correo incorrecto");
+            return "pruebaError";
+        }
+        return "redirect:/recovery";
     }
 }
 

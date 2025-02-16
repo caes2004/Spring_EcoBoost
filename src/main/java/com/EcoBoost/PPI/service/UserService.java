@@ -58,6 +58,15 @@ public class UserService {
             return null;
         }
     }
+    public Boolean recoveryPassword(String document , String email, String password){
+        User user=userRepository.findByDocumento(document);
+        if(user!=null&&user.getCorreo().equals(email)){
+            user.setPassword(passwordEncoder.encode(password));
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
 
     @Transactional
     public void delete(Long userId) {
