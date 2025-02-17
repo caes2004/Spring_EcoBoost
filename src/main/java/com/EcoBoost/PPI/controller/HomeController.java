@@ -109,10 +109,9 @@ private RolService rolService;
                                    Model model, RedirectAttributes redirectAttributes) {
         if (userService.recoveryPassword(document, email, password)) {
 
-            redirectAttributes.addFlashAttribute("mensaje", "Contraseña actualizada con éxito");
+            redirectAttributes.addFlashAttribute("success", "Contraseña actualizada con éxito");
         } else {
-            model.addAttribute("error", "Usuario no encontrado o correo incorrecto");
-            return "pruebaError";
+            redirectAttributes.addFlashAttribute("error", "Documento o correo incorrectos");
         }
         return "redirect:/recovery";
     }
