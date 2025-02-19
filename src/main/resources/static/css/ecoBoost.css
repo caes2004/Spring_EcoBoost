@@ -77,17 +77,96 @@
     margin-right: auto;
 }
 
-/* Carrito y búsqueda */
-#homeSearch,
-#homeCart {
+/* toggle y búsqueda */
+#darkmode-toggle{
     width: 40px;
     height: 40px;
     margin-left: 15px;
 }
 
-#homeCart {
-    margin-right: 15px;
+#darkmode-toggle {
+    margin-right: 100px;
 }
+
+/* toggle y búsqueda */
+#homeSearch {
+
+    width: 40px;
+    height: 40px;
+    margin-left: 15px;
+    border-radius: 50%;
+    border: none; /* Eliminar el borde */
+    background-color: #3b5704;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+
+}
+
+
+#homeSearch i{
+    font-size: 20px; /* Aumenta el tamaño del icono */
+}
+
+/* Efecto al pasar el mouse */
+#homeSearch:hover {
+    background-color: #f0f0f0; /*  */
+    transform: scale(1.1);
+}
+
+#homeSearch:hover i{
+    color: black !important; /* Icono negro */
+}
+
+
+.darkmode{
+
+    background: #2e2f30;
+
+    #Header {
+
+        background: linear-gradient(to right, #3b5704, #000000);
+
+    }
+
+    #miniMessage{
+
+        color: #fff;
+    }
+
+    #tableBoardest {
+
+        background-color: #3b5704;
+    }
+
+    #titleTopEcoUsers, #titleTopEcoins, #titleTopDescuentos, #titleTopProductos, #EcoUser {
+        color: #ffffff;
+
+    }
+
+    #adDiscover{
+        color: #000000;
+        background-color: #709e51;
+    }
+
+    .buttonFormat{
+        border: 3px solid #3b5704;
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    #footerHome{
+        background-color: #3b5704;
+        color: #000000;
+    }
+
+
+}
+
+
+
+
 
 /* Responsiveness */
 @media screen and (max-width: 1024px) {
@@ -154,6 +233,8 @@
     }
 }
 
+
+
 /* MiniMessages */
 #miniMessage {
     margin-top: 7.5%; /* Ajusta el margen superior para dar espacio */
@@ -162,13 +243,8 @@
     padding: 8px; /* Agrega padding para mejorar la legibilidad */
     color: #3b5704; /* Asegúrate de que el texto sea visible */
 }
-@media screen and (max-width: 768px) {
-    #miniMessage {
-        margin-top: 50%; /* Aumenta el margen superior para separarlo del encabezado */
-        font-size: 14px; /* Ajusta el tamaño de la fuente si es necesario */
-        padding: 1px;
-    }
-}
+
+
 /* Table */
 #tableBoardest {
     border-color: #3b5704;
@@ -206,18 +282,6 @@ th, td {
     color: white;
 }
 
-@media screen and (max-width: 768px) {
-    #tableBoardest {
-        margin-left: 5%;
-        margin-right: 5%;
-    }
-
-    th,
-    td {
-        padding: 8px 4px;
-        font-size: 14px;
-    }
-}
 
 /* Discover */
 #adDiscover {
@@ -277,31 +341,6 @@ th, td {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-@media screen and (max-width: 1024px) {
-    .buttonFormat {
-        width: 30%;
-        font-size: 16px;
-        padding: 8px 16px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .buttonFormat {
-        width: 45%;
-        margin-left: 2%;
-        font-size: 14px;
-        padding: 6px 12px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .buttonFormat {
-        width: 90%;
-        margin-left: 0;
-        font-size: 12px;
-        padding: 5px 10px;
-    }
-}
 
 /* Footer */
 #footerHome {
@@ -334,24 +373,103 @@ th, td {
     margin: 0.5rem 0;
 }
 
-@media screen and (max-width: 768px) {
-    #footerHome {
-        flex-direction: column;
-        align-items: flex-start;
-        text-align: left;
-    }
 
-    .containerCol {
-        margin: 20px 0;
-    }
 
-    #iconGmail,
-    #iconWhatsapp {
-        height: 1em;
-    }
-}
 
 body {
     margin: 0;
     background-color: #fff;
+}
+
+
+
+/* Código del toggle (modo oscuro) de la página */
+
+
+/* Clase para el toggle movible */
+label {
+
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: block;
+    background: #ebebeb;
+    border-radius: 200px;
+    box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: 0.6s; /* transicion para el fondo del toggle */
+}
+
+
+label:after{
+
+    content: "";
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: linear-gradient(180deg, #fcb900,#f7e600); /* Color del circulo del toggle */
+    border-radius: 30px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.6s; /* transicion para la bolita */
+}
+
+label i {
+    font-size: 20px; /* Ajusta el tamaño según lo que necesites */
+    color: #555; /* Cambia el color si quieres */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.6s; /* Para suavizar el cambio */
+}
+
+.sun-icon {
+    position: absolute;
+    left: 20%; /* Lo posiciona a la izquierda */
+    font-size: 20px;
+    color: #555;
+    transition: opacity 0.4s;
+}
+
+/* Ícono del sol (modo oscuro) */
+.moon-icon {
+    position: absolute;
+    left: 80%; /* Lo posiciona a la derecha */
+    font-size: 20px;
+    color: #555;
+    transition: opacity 0.4s;
+}
+
+/* Cuando el toggle está activado, ocultar la luna y mostrar el sol */
+input:checked + label .moon-icon {
+    opacity: 1;
+}
+
+input:checked + label .sun-icon {
+    opacity: 1;
+
+}
+
+/* Clase para ocultar el checkbox */
+input{
+
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+/* Clase para poner fondo del toggle oscuro cuando el checkbox esté activado */
+input:checked + label{
+    background: #242424;
+}
+
+/* Pasar la bolita -100% a la derecha */
+input:checked + label:after{
+    left: 95px;
+    transform: translateX(-100%);
+    background: linear-gradient(180deg, #777,#3a3a3a);
 }
