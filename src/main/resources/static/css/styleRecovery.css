@@ -1,0 +1,109 @@
+/* Header's font import */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+body {
+    background: linear-gradient(90deg, #3B5704 0%, #9EEF42 100%);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+}
+.data-recovery {
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem; /* Ajusta el espacio entre inputs y botones */
+}
+
+.d-flex{
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.btn-recovery {
+    background-color: #28a745;
+    border-color: #28a745;
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+    font-weight: 650;
+}
+
+.btn-recovery:hover {
+    background-color: #ffffff;
+    border-color: #000000;
+    color: #243600;
+    cursor: pointer;
+}
+
+#Logo {
+
+    width: 40%;
+    position: relative;
+    top: -30px; /* Ajusta la posición vertical */
+}
+
+.btn-light{
+
+    background-color: red;
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+    font-weight: 600;
+}
+
+.btn-light:hover {
+    background-color: #ffffff;
+    border-color: #000000;
+    color: #000000;
+    cursor: pointer;
+
+}
+input.form-control::placeholder{
+
+    color: #446404;
+}
+
+input.form-control {
+    border: 2px solid rgb(153, 150, 150);
+    font-weight: 650;
+
+}
+
+input:hover {
+
+    border: 2px solid black;
+
+}
+
+
+#mascotica{
+    width: 11rem;
+    position: absolute;
+    top: 34%;
+    /* Posición de la mascota */
+    left: 22%;
+    /* Posición de la mascota */
+    padding-top: 2rem;
+}
+
+@media screen and (max-width:1300px ) {
+
+    #mascotica{
+
+        display: none;
+    }
+
+}
