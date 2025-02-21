@@ -21,7 +21,7 @@ if (darkmode === "active") {
     disableDarkmode(); // Si no está activo, forzamos el modo claro
 }
 
-// Escuchar cambios en el checkbox
+// Escuchar cambios en el checkboxxx
 toggle.addEventListener("change", () => {
     if (toggle.checked) {
         enableDarkmode();
