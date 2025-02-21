@@ -67,11 +67,7 @@
     background-color:  #c3ffae;
 
 }
-#userIcon {
-    width: 55px;
-    height: auto;
-    margin-right: 10px;
-}
+
 
 #userDefault {
     font-size: 18px;
@@ -94,7 +90,7 @@
 #ecoLogoHome {
     width: 50px;
     height: auto;
-    margin-right: 10px;
+    margin-right: 1%;
     margin-left: 38%;
 }
 
@@ -103,12 +99,35 @@
     margin-right: auto;
 }
 
-/* Carrito y búsqueda */
-#homeSearch,
-#homeCart {
+#darkmode-toggle{
     width: 40px;
     height: 40px;
     margin-left: 15px;
+
+
+}
+
+#darkmode-toggle {
+    margin-right: 60px;
+
+}
+
+
+/* Carrito y búsqueda */
+#homeSearch,
+#homeCart {
+
+    width: 50px;
+    height: 50px;
+    margin-left: 15px;
+    border-radius: 50%;
+    border: none; /* Eliminar el borde */
+    background-color: #3b5704;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+
 }
 
 #homeCart {
@@ -116,6 +135,92 @@
 }
 
 
+/* Efecto al pasar el mouse */
+#homeSearch:hover,
+#homeCart:hover {
+    background-color: #f0f0f0; /*  */
+    transform: scale(1.1);
+
+}
+
+#homeSearch:hover i,
+#homeCart:hover i {
+    color: black !important; /* Icono negro */
+}
+
+#logOut {
+
+    width: 50px;
+    height: 50px;
+    margin-left: 15px;
+    border-radius: 50%;
+    border: none; /* Eliminar el borde */
+    background-color: #be1d1d;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+
+}
+
+#logOut:hover {
+    background-color: #f0f0f0;
+    color: black !important; /* Icono negro */
+    transform: scale(1.1);
+
+}
+
+#logOut:hover i {
+    color: black !important; /* Icono negro */
+}
+
+
+#userIcon {
+    width: 50px;
+    height: 50px;
+    margin-left: 15px;
+    border-radius: 50%;
+    border: none; /* Eliminar el borde */
+    background-color: #81b622;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+}
+
+#userIcon:hover {
+    background-color: #f0f0f0;
+    color: black !important; /* Icono negro */
+    transform: scale(1.1);
+
+}
+
+#userIcon:hover i {
+    color: black !important; /* Icono negro */
+}
+
+#homeSearch i,
+#homeCart i,
+#logOut i,
+#userIcon i{
+    font-size: 145%; /* Aumenta el tamaño del icono */
+}
+
+.btn{
+
+    border: none;
+    background-color: #3b5704;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+
+}
+
+.btn:hover {
+    background-color: #f0f0f0; /*  */
+    color: #090909;
+    transform: scale(1.1);
+
+}
 
 #inic {
     margin-top: 15%;
@@ -347,6 +452,7 @@ body {
     background-color: #fff;
 }
 /* Añade este bloque al final de tu CSS */
+
 #logoutButton {
     position: absolute; /* Puedes cambiarlo a relative si prefieres */
     top: 10px; /* Ajusta la posición según tus necesidades */
@@ -356,6 +462,8 @@ body {
     padding: 10px 15px; /* Espaciado */
     text-decoration: none; /* Sin subrayado */
     border-radius: 5px; /* Bordes redondeados */
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+
 }
 
 #mainContent {
@@ -375,24 +483,180 @@ body {
     right: 40%;
 }
 
+.container {
+    margin-top: 15%;
+}
 
+
+
+/* Código del toggle (modo oscuro) de la página */
+
+
+/* Clase para el toggle movible */
+label {
+
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: block;
+    background: #ebebeb;
+    border-radius: 200px;
+    box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4), inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: 0.6s; /* transicion para el fondo del toggle */
+}
+
+
+label:after{
+
+    content: "";
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: linear-gradient(180deg, #fcb900,#f7e600); /* Color del circulo del toggle */
+    border-radius: 30px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.6s; /* transicion para la bolita */
+}
+
+label i {
+    font-size: 20px; /* Ajusta el tamaño según lo que necesites */
+    color: #555; /* Cambia el color si quieres */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.6s; /* Para suavizar el cambio */
+}
+
+.sun-icon {
+    position: absolute;
+    left: 20%; /* Lo posiciona a la izquierda */
+    font-size: 20px;
+    color: #555;
+    transition: opacity 0.4s;
+}
+
+/* Ícono del sol (modo oscuro) */
+.moon-icon {
+    position: absolute;
+    left: 80%; /* Lo posiciona a la derecha */
+    font-size: 20px;
+    color: #555;
+    transition: opacity 0.4s;
+}
+
+/* Cuando el toggle está activado, ocultar la luna y mostrar el sol */
+input:checked + label .moon-icon {
+    opacity: 1;
+}
+
+input:checked + label .sun-icon {
+    opacity: 1;
+
+}
+
+/* Clase para ocultar el checkbox */
+input{
+
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+/* Clase para poner fondo del toggle oscuro cuando el checkbox esté activado */
+input:checked + label{
+    background: #242424;
+}
+
+/* Pasar la bolita -100% a la derecha */
+input:checked + label:after{
+    left: 95px;
+    transform: translateX(-100%);
+    background: linear-gradient(180deg, #777,#3a3a3a);
+}
+
+
+.darkmode{
+
+    background: #2e2f30;
+
+    #Header {
+
+        background: linear-gradient(to right, #3b5704, #000000);
+
+    }
+
+    .container{
+
+        color: #ffffff;
+    }
+
+
+}
+
+/* Responsiveness */
+
+@media screen and (max-width: 1200px) {
+    #ecoLogoHome {
+        margin-left: 25%;
+    }
+}
 
 @media screen and (max-width: 1000px) {
-    #ecoLogoHome {
-        width: 40px;
-        margin-left: auto;
 
+    #ecoLogoHome {
+        margin-left: 20%;
+    }
+
+    #userDefault {
+        font-size: 16px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    #ecoLogoHome {
-        width: 40px;
-        margin-left: auto;
+    #Header {
+        flex-wrap: wrap;
+        /* Permite que los elementos se alineen en varias filas si es necesario */
+        justify-content: center;
+        /* Centra el contenido en pantallas pequeñas */
+        padding: 10px 5px;
     }
 
-    #inic {
-        top: 70px;
-        right: 10px;
+    #ecoLogoHome {
+        margin-left: 10px;
+        /* Alinea el logo con el texto */
+        margin-right: 5px;
+        /* Espacio entre el logo y el texto */
+    }
+
+    #textLogoHome {
+        font-size: 20px;
+        margin-right: 0;
+        text-align: left;
+        /* Alinea el texto a la izquierda */
+        width: auto;
+    }
+
+    #homeSearch,
+    #homeCart {
+        width: 30px;
+        height: 30px;
+        margin-left: 10px;
+    }
+
+    #userIcon {
+        width: 40px;
+    }
+
+    #userDefault {
+        font-size: 14px;
     }
 }
+
+
+

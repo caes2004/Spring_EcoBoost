@@ -3,73 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <title>Panel de Comprador - EcoBoost</title>
+
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/compradorHome.css">
+    <script src="/EcoBoost/darkMode.js" defer></script>
+    <script src="/JavaScript/darkMode.js" defer></script>
 
 </head>
-<body>
+
+<body class="darkmode">
 
 <!-- HEADER -->
-    <div id="Header" class="d-flex align-items-center justify-content-between p-3">
-       <span class="user-link d-flex align-items-center">
-        <a href="/perfil">
-        <img id="userIcon" src="/images/homepage/userIcon.png" alt="Icono de Usuario" width="30" height="30">
-       </a>
-        <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
-    </span>
+<div id="Header" class="d-flex align-items-center justify-content-between p-3">
+        <span class="user-link d-flex align-items-center">
 
-        <img id="ecoLogoHome" src="/images/homepage/EcoLogoSinLetra.png" alt="Logo EcoBoost" width="50" height="50">
-        <h1 id="textLogoHome" class="fontHeaders">ECOBOOST</h1>
-        <div class="d-flex align-items-center">
-            <img id="homeSearch" src="/images/homepage/iconSearch.png" alt="Boton de Búsqueda" width="30" height="30" class="me-3">
-            <img id="homeCart" src="/images/homepage/iconCart.png" alt="Carrito de Compras" width="30" height="30">
-        </div>
+
+            <button  id="userIcon" onclick="location.href='/perfil'"> <i class="fa-solid fa-user" style="color: #ffffff;"></i></button>
+            <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
+        </span>
+
+    <img id="ecoLogoHome" src="/images/homepage/EcoLogoSinLetra.png" alt="Logo EcoBoost" width="50" height="50">
+    <h1 id="textLogoHome" class="fontHeaders">ECOBOOST</h1>
+
+    <div class="elementosDerecha">
+
+        <button id="logOut" onclick="if (confirmarLogOut()) location.href='/logout'">
+            <i class="fa-solid fa-power-off" style="color: #ffffff;"></i>
+        </button>
+
+        <button  id="homeSearch" > <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"> </i></button>
+
+        <button  id="homeCart" onclick="location.href='/comprador/carrito'"> <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"> </i></button>
+        <!-- Botón de Mis Pedidos al final de la página -->
+        <!-- <div class="container mt-5">
+            <a href="/comprador/carrito" class="btn btn-secondary w-100">Mi Carrito</a>
+        </div> -->
+
+        <input type="checkbox" id="darkmode-toggle"/> <!-- Hacemos un checkbox para acompañar el toggle y lo escondemos -->
+
+        <label for="darkmode-toggle">
+            <i class="fa-regular fa-moon moon-icon"></i>
+            <i class="fa-regular fa-sun sun-icon"></i>
+        </label>
+
     </div>
+</div>
 
-    <!-- Botón de Log Out -->
-    <div id="inic">
-        <div  class="container mt-12 text-end">
-        <a href="/logout" onclick="return confirmarLogOut()" class="btn btn-outline-danger">Log Out</a>
-         </div>
-    </div>
-    <!-- Contenido principal -->
-    <div class="container mt-14">
-        <h1>Bienvenido, <span th:text="${session.usuarioLogeado.nombre}">Comprador</span>!</h1>
 
-        <h2>Explora Nuestros Productos</h2>
-        <p>Encuentra los mejores productos y realiza tus compras de forma segura.</p>
-    </div>
 
-        <div class="container mt-5">
-            <h2>Lista de Productos</h2>
 
-            <form method="get" action="/comprador/home" class="form-inline mb-4">
-                <input type="text" name="palabraClave" class="form-control mr-2" placeholder="Buscar producto..." />
-                <button type="submit" class="btn btn-primary">Buscar</button>
-            </form>
 
-            <div class="row">
-                <div th:each="producto : ${productos}" class="col-md-4 mb-4">
-                    <div class="card">
-                        <img th:src="@{/uploads/{nombreImagen}(nombreImagen=${producto.imagenProducto})}" class="card-img-top" alt="Imagen del Producto">
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${producto.nombre_producto}">Nombre Producto</h5>
-                            <p class="card-text" th:text="${producto.descripcion}">Descripción</p>
-                            <p class="card-text"><strong>Stock disponible:</strong> <span th:text="${producto.cantidadStock}">0</span></p>
-                            <p class="card-text"><strong>Precio:</strong> $<span th:text="${producto.valor}">0.00</span></p>
-                            <form method="post" action="/comprador/agregar-al-carrito">
-                                <input type="hidden" name="productoId" th:value="${producto.id}" />
-                                <input type="number" name="cantidad" min="1" value="1" class="form-control" />
-                                <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
-                            </form>
 
-                        </div>
-                    </div>
+<!-- Contenido principal -->
+<div class="container mt-14">
+    <h1>Bienvenido, <span th:text="${session.usuarioLogeado.nombre}">Comprador</span>!</h1>
+
+    <h2>Explora Nuestros Productos</h2>
+    <p>Encuentra los mejores productos y realiza tus compras de forma segura.</p>
+</div>
+
+<div class="container mt-5">
+    <h2>Lista de Productos</h2>
+
+    <form method="get" action="/comprador/home" class="form-inline mb-4">
+        <input type="text" name="palabraClave" class="form-control mr-2" placeholder="Buscar producto..." />
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+
+    <div class="row">
+        <div th:each="producto : ${productos}" class="col-md-4 mb-4">
+            <div class="card">
+                <img th:src="@{/uploads/{nombreImagen}(nombreImagen=${producto.imagenProducto})}" class="card-img-top" alt="Imagen del Producto">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${producto.nombre_producto}">Nombre Producto</h5>
+                    <p class="card-text" th:text="${producto.descripcion}">Descripción</p>
+                    <p class="card-text"><strong>Stock disponible:</strong> <span th:text="${producto.cantidadStock}">0</span></p>
+                    <p class="card-text"><strong>Precio:</strong> $<span th:text="${producto.valor}">0.00</span></p>
+                    <form method="post" action="/comprador/agregar-al-carrito">
+                        <input type="hidden" name="productoId" th:value="${producto.id}" />
+                        <input type="number" name="cantidad" min="1" value="1" class="form-control" />
+                        <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+                    </form>
+
                 </div>
             </div>
         </div>
-
+    </div>
+</div>
 <!-- Bloque de mensajes de éxito o error -->
 <div class="container mt-3">
     <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -82,18 +104,14 @@
     </div>
 </div>
 
-    <!-- Botón de Mis Pedidos al final de la página -->
-    <div class="container mt-5">
-        <a href="/comprador/carrito" class="btn btn-secondary w-100">Mi Carrito</a>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script de confirmación para Log Out -->
-    <script>
-        function confirmarLogOut() {
-            return confirm("¿Estás seguro de que deseas cerrar sesión?");
-        }
-    </script>
+<!-- Script de confirmación para Log Out -->
+<script>
+    function confirmarLogOut() {
+        return confirm("¿Estás seguro de que deseas cerrar sesión?");
+    }
+</script>
 </body>
 </html>
