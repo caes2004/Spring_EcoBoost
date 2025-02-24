@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+/* Header's font style*/
+.fontHeaders {
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Info text's font import*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
+/* Info text's font */
+.fontTexts {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+/* MiniMessages Font import */
+@import url('https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300..900&display=swap');
+
+/* MiniMessages Font */
+.fontMiniMessages {
+    font-family: "Darker Grotesque", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+/* Desing */
+
+
+body {
+    background: linear-gradient(to right, #4b7c4b, #aec9a7);
+}
+
+/* Contenedor del logo */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+    margin-right: 26%;
+}
+
+#ecoLogoHomeVendedor {
+    width: 28%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Contenedor del perfil del vendedor */
+.perfil-vendedor {
+    background-color: white;
+    width: 495px;
+    height: 700px;
+    margin:auto;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    right: 75px; /* Ajusta la posición */
+    top: 155px;
+}
+
+/* Imagen del icono de perfil */
+.perfil-icono {
+    margin-top: 10px;
+    margin-left: 9px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #b0c4de;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos del texto */
+#vendedor{
+    color: green;
+    font-size: 18px;
+    margin-top:35px;
+}
+#documento {
+    color: rgb(77, 100, 77);
+    font-size: 18px;
+    margin-top: 1px;
+    margin-bottom: 37px;
+}
+
+/* Contenedor de los botones superiores */
+.botones-superiores {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espaciado entre botones */
+    flex-wrap: wrap; /* Permite que los botones se acomoden en pantallas pequeñas */
+    width: 100%;
+    margin-top: 25px; /* Separación entre "Documento" y los botones */
+}
+
+/* Estilos de los botones */
+.modificar-perfil,
+.mis-productos {
+    border-radius: 14px;
+    border: 3px solid #3b5704;
+    background-color: #c1ff72;
+    color: #658f49;
+    text-align: center;
+    width: auto;
+    min-width: 150px;
+    padding: 10px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: "Quicksand", sans-serif;
+    text-decoration: none;
+}
+
+.modificar-perfil:hover,
+.mis-productos:hover {
+    background-color: #fff;
+    color: #3b5704;
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.modificar-perfil {
+    background-color: #4CAF50;
+    color: white;
+    margin-right: 15px;
+}
+
+.mis-productos {
+    background-color: orange;
+    color: black;
+}
+
+
+#ecotebanL{
+    margin-top: 48px;
+    width: 170px;
+}
+/* Botón de Logout centrado abajo */
+/* Estilos del botón de Logout */
+.logout {
+    background-color: #fc3f06;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: auto;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logout:hover {
+    background-color: #ffffff;
+    color: #ff0000;
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del formulario de registrar producto */
+.containerForm {
+    background-color: rgb(145, 255, 145);
+    border-radius: 19px;
+    padding: 33px;
+    padding-right: 40px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px !important;
+    width: 50%;
+    margin-left: 197px;
+}
+
+/* Centrar el título */
+.containerForm h2 {
+    font-family: "Quicksand", sans-serif;
+    font-weight: bold;
+    color: #254718;
+    text-align: center;
+}
+
+/* Ajuste de etiquetas y campos de formulario */
+.containerForm .form-label {
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    color: #215c12;
+}
+
+.containerForm .form-control,
+.containerForm .form-select {
+    border-radius: 10px;
+    border: 2px solid #409235;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+}
+
+.containerForm .form-control:focus,
+.containerForm .form-select:focus {
+    border-color: #f1ffed;
+    box-shadow: 0 0 5px rgba(101, 143, 73, 0.5);
+}
+
+/* Ajuste de botón */
+.containerForm .btn-primary {
+    background-color: #519c34;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.containerForm .btn-primary:hover {
+    background-color: #fff;
+    color: #4CAF50;
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .containerForm {
+        padding: 25px;
+        max-width: 90%;
+    }
+    .containerForm h2 {
+        font-size: 22px;
+    }
+    .containerForm .btn-primary {
+        font-size: 16px;
+    }
+}

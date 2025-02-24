@@ -89,13 +89,13 @@ private RolService rolService;
 
 
             } else {
-                model.addAttribute("error", "Rol desconocido");
-                return "pruebaError";
+                model.addAttribute("error", "Usuario o contraseña incorrectos");
+                return "login"; //  Retorna a la misma página del formulario de login
             }
         } else {
             // Si las credenciales son incorrectas, regresa al login con un mensaje de error
             model.addAttribute("error", "Usuario o contraseña incorrectos");
-            return "pruebaError";
+            return "login";
         }
     }
     @GetMapping("/recovery")String recovery(){

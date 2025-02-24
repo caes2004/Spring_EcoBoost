@@ -102,7 +102,7 @@
 #darkmode-toggle{
     width: 40px;
     height: 40px;
-    margin-left: 15px;
+    margin-left: 40px;
 
 
 }
@@ -551,17 +551,17 @@ label i {
 }
 
 /* Cuando el toggle está activado, ocultar la luna y mostrar el sol */
-input:checked + label .moon-icon {
+#darkmode-toggle:checked + label .moon-icon {
     opacity: 1;
 }
 
-input:checked + label .sun-icon {
+#darkmode-toggle:checked + label .sun-icon {
     opacity: 1;
 
 }
 
 /* Clase para ocultar el checkbox */
-input{
+#darkmode-toggle{
 
     width: 0;
     height: 0;
@@ -574,7 +574,7 @@ input:checked + label{
 }
 
 /* Pasar la bolita -100% a la derecha */
-input:checked + label:after{
+#darkmode-toggle:checked + label:after{
     left: 95px;
     transform: translateX(-100%);
     background: linear-gradient(180deg, #777,#3a3a3a);
@@ -657,6 +657,3 @@ input:checked + label:after{
         font-size: 14px;
     }
 }
-
-
-

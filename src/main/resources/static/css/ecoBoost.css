@@ -166,6 +166,12 @@
         color: #000000;
     }
 
+    #tableUsers tr:hover {
+        background-color: #a6d56a; /* Un verde más claro */
+        color: white;
+        transition: background-color 0.3s ease-in-out;
+    }
+
 
 }
 
