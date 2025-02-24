@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoLogin 👤</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/ecoLogin.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -16,18 +19,20 @@
 
     <img id="Logo" src="/images/login/ecoLogoOriginal.png" alt="Logo EcoBoost">
 
-
-    <!-- Prueba de cambios -->
-
     <div class="social-container">
+
         <div class="social-container-element">
-            <img src="/images/login/google.png" alt="Logo Google">
-            <span>Google</span>
+            <button id="createAccount" onclick="location.href='/create-user'">
+                <i class="fa-solid fa-user-plus"></i> Crear Cuenta
+            </button>
         </div>
+
         <div class="social-container-element">
-            <img src="/images/login/facebook.png" alt="Logo Facebook">
-            <span>Facebook</span>
+            <button id="invitado" onclick="location.href='/'">
+                Continuar como invitado <i class="fa-solid fa-user"></i>
+            </button>
         </div>
+
     </div>
 
     <div class="data-login">
@@ -35,6 +40,9 @@
         <form action="#" th:action="@{/login}" method="post">
             <input type="text" name="document" class="input" placeholder="Documento" required>
             <input type="password" name="password" class="input" placeholder="Contraseña" required>
+
+            <!-- <button type="button" id="togglePassword">👁️</button> -->
+
             <button class="btn" type="submit">INICIAR SESIÓN</button>
 
             <!-- Mensaje de error si existe -->
@@ -57,4 +65,31 @@
 
 
 </body>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener el mensaje de error desde Thymeleaf
+        let errorMessage = "[[${error}]]";
+
+        // Verificar si existe un error y no está vacío
+        if (errorMessage && errorMessage.trim() !== "" && errorMessage !== "null") {
+            Swal.fire({
+                title: '¡Woops!',
+                html: `
+                <div style="display: flex; align-items: center; gap: 20px; justify-content: center;">
+                    <img src="/images/mascota_alert.png" width="200">
+                    <i class="fa-solid fa-triangle-exclamation" style="font-size: 40px; color: red;"></i>
+                </div>
+                <p>Ingresaste el usuario o la contraseña <br> incorrectos, inténtalo de nuevo.</p>
+            `,
+                confirmButtonText: 'Intentar de nuevo'
+            });
+
+            // Elimina el mensaje de la URL para que no se muestre en recargas
+            history.replaceState({}, document.title, window.location.pathname);
+        }
+    });
+</script>
+
 </html>

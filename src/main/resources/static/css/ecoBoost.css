@@ -89,7 +89,8 @@
 }
 
 /* toggle y búsqueda */
-#homeSearch {
+#homeSearch,
+#userIcon {
 
     width: 40px;
     height: 40px;
@@ -105,17 +106,20 @@
 }
 
 
-#homeSearch i{
-    font-size: 20px; /* Aumenta el tamaño del icono */
+#homeSearch i,
+#userIcon i{
+    font-size: 145%; /* Aumenta el tamaño del icono */
 }
 
 /* Efecto al pasar el mouse */
-#homeSearch:hover {
+#homeSearch:hover,
+#userIcon:hover {
     background-color: #f0f0f0; /*  */
     transform: scale(1.1);
 }
 
-#homeSearch:hover i{
+#homeSearch:hover i,
+#userIcon:hover i{
     color: black !important; /* Icono negro */
 }
 
@@ -160,6 +164,12 @@
     #footerHome{
         background-color: #3b5704;
         color: #000000;
+    }
+
+    #tableUsers tr:hover {
+        background-color: #a6d56a; /* Un verde más claro */
+        color: white;
+        transition: background-color 0.3s ease-in-out;
     }
 
 
