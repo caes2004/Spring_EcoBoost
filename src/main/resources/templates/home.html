@@ -47,110 +47,64 @@
 <div id="tableBoardest">
 
   <!-- TABLA DE TOP -->
-  <table id="tableUsers">
+  <table id="tableUsers" >
     <thead>
     <tr>
       <th id="titleTopEcoUsers" class="fontHeaders">Usuario</th>
       <th id="titleTopEcoins" class="fontHeaders">Puntos</th>
       <th id="titleTopDescuentos" class="fontHeaders">Descuento</th>
-      <th id="titleTopProductos" class="fontHeaders">Productos</th>
+      <th id="titleTopProductos" class="fontHeaders">Compras</th>
     </tr>
     </thead>
     <tbody>
-    <tr class="fontHeaders">
-      <td id="EcoUser">EstebanPro13</td>
-      <td>323</td>
-      <td>40%</td>
-      <td>23</td>
+
+    <tr th:if="${#lists.isEmpty(usuariosEcoPoints)}">
+      <td colspan="4" class="text-center text-muted">
+        No hay usuarios con EcoPoints registrados.
+      </td>
     </tr>
-    <tr class="fontHeaders">
-      <td id="EcoUser">JuanitoPro123</td>
-      <td>279</td>
-      <td>25%</td>
-      <td>18</td>
-    </tr>
-    <tr class="fontHeaders">
-      <td id="EcoUser">Johnder_YTGaming</td>
-      <td>210</td>
-      <td>15%</td>
-      <td>13</td>
+
+
+    <tr th:each="usuario : ${usuariosEcoPoints}">
+      <td id="EcoUser" th:text="${usuario.name}"></td>
+      <td th:text="${usuario.ecoPoints}"></td>
+      <td th:text="${usuario.descuento + '%'}"></td>
+      <td th:text="${usuario.ecoPoints}"></td>
     </tr>
     </tbody>
   </table>
+
 </div>
 <!-- H1 ANTES DEL CARRUSEL -->
 <h1 id="adDiscover" class="fontHeaders">¡CONOCE NUESTRO CATALOGO DE PRODUCTOS!</h1>
 <!-- CARRUSEL DEL HOME PAGE -->
 <div class="container mt-5">
   <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+
     <div class="carousel-inner">
 
-      <!-- Producto 1 -->
-      <div class="carousel-item active">
-        <div class="row justify-content-center">
-          <div class="col-md-4">
-            <div class="card">
-              <img src="/images/homepage/comedor.jpg" class="d-block w-100 carouselImg" alt="Producto 1">
-              <div class="card-body">
-                <h5 class="fontHeaders card-title">Comedor</h5>
-                <p class="fontMiniMessages card-text">Comedor echo con base a productos reciclables<br>
-                  <strong>
-                    Hogar<br>
-                    1,90cm x 80cm x 60com <br>
-                    Unidades: 4<br>
-                    100.000$ x U
-                  </strong>
-                </p>
-                <a href="/login" class="btn btn-light d-flex align-items-center">
-                  <img src="/images/icons/iconCart.png" alt="Carrito de Compras" width="20" height="20" class="me-2">
-                  Carrito
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+      <!-- Mensaje cuando no hay productos -->
+      <div th:if="${#lists.isEmpty(productos)}" class="carousel-item active text-center">
+        <p class="fontHeaders">No hay productos disponibles en este momento.</p>
       </div>
 
-      <!-- Producto 2 -->
-      <div class="carousel-item">
+      <!-- Iteración de productos -->
+      <div th:each="producto, iterStat : ${productos}"
+           th:classappend="${iterStat.first} ? 'carousel-item active' : 'carousel-item'">
         <div class="row justify-content-center">
           <div class="col-md-4">
             <div class="card">
-              <img src="/images/homepage/lamparas.jpg" class="d-block w-100 carouselImg" alt="Arbol repisa">
+              <img th:src="@{/uploads/{nombreImagen}(nombreImagen=${producto.imagen})}"
+                   class="d-block w-100 carouselImg"
+                   th:alt="${producto.nombre}">
               <div class="card-body">
-                <h5 class="fontHeaders card-title">Lampara Eco</h5>
-                <p class="card-text">Lamparas de 10cm x 8cm<br>
+                <h5 class="fontHeaders card-title" th:text="${producto.nombre}">Nombre Producto</h5>
+                <p class="fontMiniMessages card-text" th:text="${producto.descripcion}">Descripción</p>
+                <p class="fontMiniMessages">
                   <strong>
-                    Hogar<br>
-                    10cm x 8cm <br>
-                    Unidades: 7<br>
-                    9000$ x U
-                  </strong>
-                </p>
-                <a href="/login" class="btn btn-light d-flex align-items-center">
-                  <img src="/images/icons/iconCart.png" alt="Carrito de Compras" width="20" height="20" class="me-2">
-                  Carrito
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Producto 3 -->
-      <div class="carousel-item">
-        <div class="row justify-content-center">
-          <div class="col-md-4">
-            <div class="card">
-              <img src="/images/homepage/macetas.jpg" class="d-block w-100 carouselImg" alt="Producto 3">
-              <div class="card-body">
-                <h5 class="card-title">Macetas</h5>
-                <p class="card-text">Macetas realizadas con base a material reciclado<br>
-                  <strong>
-                    Accesorios<br>
-                    13cm x 9cm <br>
-                    Unidades: 11<br>
-                    5600$ x U <br>
+                    Categoría: <span th:text="${producto.categoria}"></span><br>
+                    Unidades: <span th:text="${producto.cantidad}">0</span><br>
+                    <span th:text="${producto.precio}">0</span> $ x U
                   </strong>
                 </p>
                 <a href="/login" class="btn btn-light d-flex align-items-center">
@@ -165,15 +119,16 @@
 
     </div>
 
-    <!-- Controles de anterior/siguiente -->
+    <!-- Controles del carrusel -->
     <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon carousel-control-gray" aria-hidden="true"></span>
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Anterior</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon carousel-control-gray" aria-hidden="true"></span>
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Siguiente</span>
     </button>
+
   </div>
 </div>
 
