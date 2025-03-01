@@ -39,9 +39,10 @@
         <!-- Formularios de inicio de sesión -->
         <form action="#" th:action="@{/login}" method="post">
             <input type="text" name="document" class="input" placeholder="Documento" required>
-            <input type="password" name="password" class="input" placeholder="Contraseña" required>
-
-            <!-- <button type="button" id="togglePassword">👁️</button> -->
+            <input type="password" name="password" id="password" class="input" placeholder="Contraseña" required>
+            <button type="button" class="toggle-password" onclick="togglePassword()">
+                <i class="fa-solid fa-eye"></i>
+            </button>
 
             <button class="btn" type="submit">INICIAR SESIÓN</button>
 
@@ -90,6 +91,22 @@
             history.replaceState({}, document.title, window.location.pathname);
         }
     });
+
+    function togglePassword() {
+        let passwordInput = document.getElementById("password");
+        let toggleButton = document.querySelector(".toggle-password i");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.classList.remove("fa-eye");
+            toggleButton.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            toggleButton.classList.remove("fa-eye-slash");
+            toggleButton.classList.add("fa-eye");
+        }
+    }
+
 </script>
 
 </html>
