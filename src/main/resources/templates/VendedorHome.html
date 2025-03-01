@@ -5,6 +5,7 @@
     <title>Panel de Vendedor</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="\css\vendedorHome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Librería iconos -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -14,7 +15,7 @@
 </div>
 
 <div class="perfil-vendedor">
-    <img src="/images/homepage/userIcon.png" alt="Perfil" class="perfil-icono">
+    <button  id="userIcon" onclick="location.href='/perfil'"> <i class="fa-solid fa-user" style="color: #ffffff;"></i></button>
     <h2 id="vendedor" class="fontHeaders"><span th:text="${session.usuarioLogeado.nombre}">Vendedor</span></h2>
     <p id="documento" class="fontMiniMessages"><span th:text="${session.usuarioLogeado.documento}">Documento</span></p>
 
