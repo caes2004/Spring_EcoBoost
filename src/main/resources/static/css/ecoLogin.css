@@ -124,6 +124,16 @@ body {
     color: var(--letra-box)
 }
 
+.toggle-password {
+    position: absolute;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    top: 37%;
+}
+
 .btn {
 
     width: 95%;
@@ -227,4 +237,34 @@ body {
     }
 
 }
+
+@media screen and (max-width:440px ) {
+
+    .toggle-password {
+        position: absolute;
+        right: 10px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 25px;
+        top: 34%;
+    }
+
+}
+
+@media screen and (max-width:310px ) {
+
+    .toggle-password {
+        position: absolute;
+        right: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 25px;
+        top: 32%;
+    }
+
+}
+
+
 
