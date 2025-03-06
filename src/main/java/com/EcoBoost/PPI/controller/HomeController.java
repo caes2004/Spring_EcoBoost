@@ -54,7 +54,7 @@ private final RolService rolService;
     @GetMapping("/create-user")String createUser(Model model){
 
         model.addAttribute("user", new User());
-        return "createUser";
+        return "create-user";
     }
 
 
