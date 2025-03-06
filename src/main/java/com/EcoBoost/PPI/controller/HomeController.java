@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
 import com.EcoBoost.PPI.service.ProductService;
 import com.EcoBoost.PPI.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,15 +18,22 @@ Controlador para manejo de endpoints publicos
  */
 @Controller
 public class HomeController {
-@Autowired
-ProductService productService;
-@Autowired
-private UserService userService;
-@Autowired
-private RolService rolService;
-    @GetMapping("/") public String home(){
 
-        //falta metodos para mostrar lista de productos en el carrusel
+private final UserService userService;
+private final ProductService productService;
+private final RolService rolService;
+
+
+    public HomeController(UserService userService, RolService rolService, ProductService productService) {
+        this.userService = userService;
+        this.rolService = rolService;
+        this.productService = productService;
+    }
+
+
+    @GetMapping("/") public String home(Model model){
+        model.addAttribute("productos", productService.listProductsDTOLanding());
+        model.addAttribute("usuariosEcoPoints", userService.listUsersWithEcoPoints());
         return "home";
     }
 
@@ -48,7 +54,7 @@ private RolService rolService;
     @GetMapping("/create-user")String createUser(Model model){
 
         model.addAttribute("user", new User());
-        return "create-user";
+        return "createUser";
     }
 
 

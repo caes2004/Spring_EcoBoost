@@ -1,8 +1,9 @@
 package com.EcoBoost.PPI.service;
 
+import com.EcoBoost.PPI.DTO.HomeProductDTO;
 import com.EcoBoost.PPI.entity.Product;
+import com.EcoBoost.PPI.repository.CategoryRepository;
 import com.EcoBoost.PPI.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,14 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    @Autowired  ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    private final CategoryRepository categoryRepository;
+
+    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+        this.productRepository = productRepository;
+        this.categoryRepository = categoryRepository;
+    }
 
     //Listar por palabra clave del producto
     public List<Product> listAll(String palabraClave) {
@@ -18,8 +26,24 @@ public class ProductService {
         if (palabraClave != null){
             return productRepository.findAll( palabraClave);
         }
+            List<Product> products = productRepository.findAll();
+        return products.stream().filter(p->p.getCantidadStock()>0).toList();
+    }
+    public List<HomeProductDTO> listProductsDTOLanding() {
+        List<Product> products = productRepository.findAll();
 
-        return productRepository.findAll();
+        return products.stream()
+                .filter(p->p.getCantidadStock()>0)
+                .map(product -> {
+            HomeProductDTO homeProductDTO = new HomeProductDTO();
+            homeProductDTO.setNombre(product.getNombre_producto());
+            homeProductDTO.setDescripcion(product.getDescripcion());
+            homeProductDTO.setPrecio(product.getValor());
+            homeProductDTO.setCategoria(product.getCategoria().getCategoria());
+            homeProductDTO.setImagen(product.getImagenProducto());
+            homeProductDTO.setCantidad(product.getCantidadStock());
+            return homeProductDTO;
+        }).toList();
     }
     //Listar por documento del vendedor
     public List<Product> findByDocumentoVendedor(String documentoVendedor) {

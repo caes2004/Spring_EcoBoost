@@ -1,10 +1,10 @@
 package com.EcoBoost.PPI.service;
 
+import com.EcoBoost.PPI.DTO.EcoPointsUserDTO;
 import com.EcoBoost.PPI.entity.Product;
 import com.EcoBoost.PPI.entity.User;
 import com.EcoBoost.PPI.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,16 +12,34 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+
+    private final UserRepository userRepository;
+
+    private final ProductService productService;
+
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, ProductService productService, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.productService = productService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public List<User> listAll() {
 
         return userRepository.findAll();
+    }
+    public List<EcoPointsUserDTO> listUsersWithEcoPoints() {
+        List <User> users = userRepository.findUsersWithEcoPoints();
+
+        return users.stream().map(user -> {
+            Double descuento = user.getEcoPoints() * 0.02;
+            EcoPointsUserDTO ecoPointsUserDTO = new EcoPointsUserDTO();
+            ecoPointsUserDTO.setName(user.getNombre());
+            ecoPointsUserDTO.setEcoPoints(user.getEcoPoints());
+            ecoPointsUserDTO.setDescuento(descuento);
+            return ecoPointsUserDTO;
+        }).toList();
     }
 
     public void save(User user) {
