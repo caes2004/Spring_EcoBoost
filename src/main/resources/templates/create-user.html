@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/ecoCreateUser.css"> <!-- Archivo CSS personalizado -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
     <h1 class="text-center text-white mb-4">Registro de Cuenta</h1>
 
     <!-- Formulario de Registro -->
-    <form th:action="@{/create-user}" th:object="${user}" method="post" class="p-4 rounded" style="background-color: rgba(255, 255, 255, 0.8);">
+    <form id ="registroForm" th:action="@{/create-user}" th:object="${user}" method="post" class="p-4 rounded" style="background-color: rgba(255, 255, 255, 0.8);">
         <div class="row mb-3">
             <div class="col-md-6">
                 <label for="nombre" class="form-label">Nombre</label>
@@ -112,6 +113,53 @@
             icon.classList.add("fa-eye");
         }
     }
+</script>
+<!--Script para validar contraseña coincida-->
+<script>
+ function togglePassword(inputId, button) {
+        let passwordInput = document.getElementById(inputId);
+        let icon = button.querySelector("i");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+
+    // Validación de contraseñas
+    document.getElementById('registroForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar el envío del formulario antes de la validación
+
+        const password = document.getElementById('password').value;
+        const confirmarPassword = document.getElementById('confirmar').value;
+
+        if (password !== confirmarPassword) {
+            // Si las contraseñas no coinciden, mostrar un error con SweetAlert2
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: 'Las contraseñas no coinciden.',
+                confirmButtonText: 'Aceptar'
+            });
+        } else {
+            // Si las contraseñas coinciden, enviamos el formulario
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: 'Usuario creado correctamente.',
+                confirmButtonText: 'Aceptar'
+            }).then(() => {
+                // Enviar el formulario si todo está bien
+                this.submit();
+            });
+        }
+    });
+
 </script>
 
 </body>

@@ -87,7 +87,7 @@
       <div th:if="${#lists.isEmpty(productos)}" class="carousel-item active text-center">
         <p id="mensaje-nodisponible" class="fontHeaders">No hay productos disponibles en este momento.</p> <!--Cambio con el id pal darkmode -->
       </div>
-      </div>
+      
 
       <!-- Iteración de productos -->
       <div th:each="producto, iterStat : ${productos}"
