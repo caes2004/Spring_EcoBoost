@@ -37,17 +37,8 @@ private final RolService rolService;
         return "home";
     }
 
-    //Metodos para mostrar informacion de la empresa
-    @GetMapping("/about") public String about(){
 
 
-        return "about";
-    }
-
-    @GetMapping ("/contact")String contact(){
-
-        return "contact";
-    }
 
     //Metodos publico para mostrar formularios de registro y validacion de usuarios.
 
@@ -69,6 +60,7 @@ private final RolService rolService;
         return "redirect:/login"; // Redirige a la página principal después de guardar
     }
     @GetMapping("/ecoVideo")String ecoVideo(){
+
 
         return "video";
     }
