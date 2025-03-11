@@ -11,39 +11,64 @@
     <meta charset="UTF-8">
     <title>Panel de Vendedor</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> <!-- Librería iconos -->
     <link rel="stylesheet" href="/css/mis-productos.css">
+    <script src="/JavaScript/darkMode.js" defer></script>
+
 </head>
-<body>
+
+<body class="darkmode">
+
+<!-- HEADER -->
 <div id="bienvenida">
     <div id="Header" class="d-flex align-items-center justify-content-between p-3">
-           <span class="user-link d-flex align-items-center">
-            <a href="/perfil">
-        <img id="userIcon" src="/images/homepage/userIcon.png" alt="Icono de Usuario" width="30" height="30">
-       </a>
+        <span class="user-link d-flex align-items-center">
+
+            <button  id="userIcon" onclick="location.href='/perfil'"> <i class="fa-solid fa-user" style="color: #ffffff;"></i></button>
+
             <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
         </span>
 
         <img id="ecoLogoHome" src="/images/homepage/EcoLogoSinLetra.png" alt="Logo EcoBoost" width="50" height="50">
         <h1 id="textLogoHome" class="fontHeaders">ECOBOOST</h1>
-        <div class="d-flex align-items-center">
-            <img id="homeSearch" src="/images/homepage/iconSearch.png" alt="Botón de Búsqueda" width="30" height="30" class="me-3">
+
+        <div class="elementosDerecha">
+
+            <!--  <a href="/vendedor/home" class="btn btn-light" id="add-product-btn">
+                    <img src="/images/icons/add.jpg" alt="Añadir" style="width: 20px; height: 20px; margin-right: 8px;">
+                    Añadir Producto
+                </a> -->
+
+            <button id="add-product-btn" onclick="location.href='/vendedor/home'" alt="Añadir">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span>Añadir Producto</span>
+            </button>
+
+            <button id="logOut" onclick="if (confirmarLogOut()) location.href='/logout'">
+                <i class="fa-solid fa-power-off" style="color: #ffffff;"></i>
+            </button>
+
+            <button  id="homeSearch" > <i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"> </i></button>
+
+            <input type="checkbox" id="darkmode-toggle"/> <!-- Hacemos un checkbox para acompañar el toggle y lo escondemos -->
+
+            <label for="darkmode-toggle">
+                <i class="fa-regular fa-moon moon-icon"></i>
+                <i class="fa-regular fa-sun sun-icon"></i>
+            </label>
         </div>
+
     </div>
 
     <div id="inic">
         <div class="container mt-12 text-end">
 
-            <a href="/vendedor/home" class="btn btn-light" id="add-product-btn">
-                <img src="/images/icons/add.jpg" alt="Añadir" style="width: 20px; height: 20px; margin-right: 8px;">
-                Añadir Producto
-            </a>
-            <a href="/logout" onclick="return confirmarLogOut()" class="btn btn-outline-danger">Log Out</a>
         </div>
         <div id="add_vendedor">
 
         </div>
     </div>
-<div id="my_products">
+    <div id="my_products">
         <div class="container mt-5">
             <h2>Mis Productos</h2>
             <div class="row">
@@ -64,8 +89,8 @@
             </div>
         </div>
     </div>
-    </div>
-    </body>
+</div>
+</body>
 <script>
     function confirmarLogOut() {
         return confirm("¿Estás seguro de que deseas cerrar sesión?");

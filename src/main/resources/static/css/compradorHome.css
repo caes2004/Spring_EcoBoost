@@ -279,39 +279,6 @@
 }
 
 
-/* Estilo para el sidebar */
-.sidebar {
-    position: fixed;
-    top: 7%;
-    right: -250px; /* Sidebar oculto fuera de la pantalla */
-    width: 250px;
-    height: 100vh;
-    background: linear-gradient(to right, #80b21e, #78a820);
-    color: white;
-    padding: 15px;
-    box-shadow: 2px 0 5px rgba(117, 208, 101, 0.2);
-    transition: right 0.3s ease;
-}
-
-/* Sidebar cuando está visible */
-.sidebar.show {
-    right: 0; /* Mover el sidebar a la vista */
-}
-.sidebar a {
-    color: white; /* Color de texto blanco */
-    text-decoration: none; /* Elimina el subrayado de los enlaces */
-    display: block; /* Para que el enlace ocupe todo el espacio disponible */
-    padding: 10px;
-    border-radius: 5px; /* Bordes redondeados */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
-}
-
-/* Efecto hover para los enlaces */
-.sidebar a:hover {
-    background-color: #fcfcfc; /* Color de fondo cuando se pasa el cursor (azul) */
-    color: #090909; /* Asegura que el color del texto sea blanco */
-}
-
 /* MiniMessages */
 #miniMessage {
     margin-top: 7.5%; /* Ajusta el margen superior para dar espacio */

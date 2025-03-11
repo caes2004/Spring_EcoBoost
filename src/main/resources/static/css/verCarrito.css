@@ -103,19 +103,67 @@
     margin-right: auto;
 }
 
-/* Carrito y búsqueda */
-#homeSearch,
-#homeCart {
-    width: 40px;
-    height: 40px;
+
+#logOut {
+
+    width: 60px;
+    height: 60px;
+    margin-left: 70px;
+    border-radius: 50%;
+    border: none; /* Eliminar el borde */
+    background-color: #be1d1d;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+
+}
+
+#closeSidebar{
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
+}
+
+#logOut:hover,
+#closeSidebar:hover {
+    background-color: #f0f0f0;
+    color: black !important; /* Icono negro */
+    border: none; /* Eliminar el borde */
+    transform: scale(1.1);
+
+}
+
+#logOut:hover i {
+    color: black !important; /* Icono negro */
+}
+
+
+#userIcon {
+    width: 50px;
+    height: 50px;
     margin-left: 15px;
+    border-radius: 50%;
+    border: none; /* Eliminar el borde */
+    background-color: #81b622;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+    transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
 }
 
-#homeCart {
-    margin-right: 15px;
+#userIcon:hover {
+    background-color: #f0f0f0;
+    color: black !important; /* Icono negro */
+    transform: scale(1.1);
+
 }
 
+#userIcon:hover i {
+    color: black !important; /* Icono negro */
+}
 
+#logOut i,
+#userIcon i{
+    font-size: 145%; /* Aumenta el tamaño del icono */
+}
 
 #inic {
     margin-top: 8%;
@@ -177,7 +225,7 @@
 /* Estilo para el sidebar */
 .sidebar {
     position: fixed;
-    top: 7%;
+    top: 12%;
     right: -250px; /* Sidebar oculto fuera de la pantalla */
     width: 250px;
     height: 100vh;
@@ -313,23 +361,8 @@ th, td {
 }
 
 
-/* Footer */
-#footerHome {
-    display: flex;
-    background-color: #c1ff72;
-    color: #3b5704;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-}
 
-#iconGmail,
-#iconWhatsapp {
-    width: auto;
-    height: 1.2em;
-    margin-right: 10px;
-    vertical-align: middle;
-}
+
 
 .containerCol {
     display: flex;
@@ -374,7 +407,6 @@ body {
     position: relative;
     right: 40%;
 }
-
 
 
 @media screen and (max-width:850px ) {

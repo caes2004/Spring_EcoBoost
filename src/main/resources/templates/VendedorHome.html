@@ -83,19 +83,26 @@
     function confirmarLogOut() {
         return confirm("¿Estás seguro que deseas cerrar sesión?");
     }
+
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.querySelector("form");
 
         // Mostrar mensaje de bienvenida
-        const nombreVendedor = document.getElementById("vendedor").innerText;
-        Swal.fire({
-            imageUrl: "/images/login/mascota_2.png",
-            imageWidth: 300,
-            imageHeight: 350,
-            title: `¡Bienvenido ${nombreVendedor}!`,
-            text: 'Aquí podrás registrar, visualizar y eliminar tus productos de forma segura.',
-            showConfirmButton: true
-        });
+        if (!localStorage.getItem("bienvenidaMostrada")) {
+            const nombreVendedor = document.getElementById("vendedor").innerText;
+            Swal.fire({
+                imageUrl: "/images/login/mascota_2.png",
+                imageWidth: 300,
+                imageHeight: 350,
+                title: `¡Bienvenido ${nombreVendedor}!`,
+                text: 'Aquí podrás registrar, visualizar y eliminar tus productos de forma segura.',
+                showConfirmButton: true
+            });
+
+            // Guardar en localStorage que ya se mostró el mensaje
+            localStorage.setItem("bienvenidaMostrada", "true");
+        }
+
 
         form.addEventListener("submit", function(event) {
             event.preventDefault(); // Evita el envío inmediato para mostrar la alerta primero
