@@ -1,4 +1,4 @@
-package com.EcoBoost.PPI.ecoBoostTests;
+package com.EcoBoost.PPI.ecoBoostTests.integration;
 
 import com.EcoBoost.PPI.config.SecurityConfig;
 import com.EcoBoost.PPI.controller.HomeController;
