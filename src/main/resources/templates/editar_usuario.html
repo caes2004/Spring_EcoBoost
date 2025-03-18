@@ -4,62 +4,68 @@
     <meta charset="UTF-8">
     <title>Editar Perfil</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="\css\editar_usuario.css">
 </head>
 <body>
 
 <div class="container mt-5">
-    <h2>Editar Perfil</h2>
+    <h2 class="fontHeaders">Editar Perfil</h2>
 
-    <form th:action="@{/editar}" method="post"  th:object="${usuarioForm}" enctype="multipart/form-data">
-        <div class="col-md-6">
-            <label for="documento" class="form-label">Documento</label>
-            <input type="text" id="documento" name="documento" class="form-control bg-light" th:value="${usuarioForm.documento}" readonly>
+    <form th:action="@{/editar}" method="post" th:object="${usuarioForm}" enctype="multipart/form-data">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="documento" class="form-label fontHeaders">Documento</label>
+                <input type="text" id="documento" name="documento" class="form-control bg-light" th:value="${usuarioForm.documento}" readonly>
+            </div>
+
+            <div class="col-md-6">
+                <label for="nombre" class="form-label fontHeaders">Nombre</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" th:value="${usuarioForm.nombre}" required>
+            </div>
         </div>
 
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="apellido" class="form-label fontHeaders">Apellido</label>
+                <input type="text" id="apellido" name="apellido" class="form-control" th:value="${usuarioForm.apellido}" required>
+            </div>
 
-        <div class="col-md-6">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" id="nombre" name="nombre" class="form-control" th:value="${usuarioForm.nombre}" required>
+            <div class="col-md-6">
+                <label for="password" class="form-label fontHeaders">Nueva Contraseña <strong>(Déjala vacía si no quieres cambiarla)</strong></label>
+                <input type="password" id="password" th:field="*{password}" class="form-control">
+            </div>
         </div>
 
-        <div class="col-md-6">
-            <label for="apellido" class="form-label">Apellido</label>
-            <input type="text" id="apellido" name="apellido" class="form-control" th:value="${usuarioForm.apellido}" required>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="contacto" class="form-label fontHeaders">Contacto</label>
+                <input type="text" id="contacto" name="contacto" class="form-control" th:value="${usuarioForm.contacto}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="correo" class="form-label fontHeaders">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" class="form-control" th:value="${usuarioForm.correo}" required>
+            </div>
         </div>
 
-        <!-- Contraseña -->
-        <div class="col-md-6">
-            <label for="password" class="form-label">Nueva Contraseña <strong>(Déjala vacía si no quieres cambiarla)</strong></label>
-            <input type="password" id="password" th:field="*{password}" class="form-control">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="fechaNacimiento" class="form-label fontHeaders">Fecha de Nacimiento</label>
+                <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" th:value="${usuarioForm.fechaNacimiento}" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="direccion" class="form-label fontHeaders">Dirección</label>
+                <input type="text" id="direccion" name="direccion" class="form-control" th:value="${usuarioForm.direccion}" required>
+            </div>
         </div>
 
-        <div class="col-md-6">
-            <label for="contacto" class="form-label">Contacto</label>
-            <input type="text" id="contacto" name="contacto" class="form-control" th:value="${usuarioForm.contacto}" required>
+        <div class="btn-container">
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <form th:action="@{${usuarioForm.rol == 'comprador' ? '/comprador/home' : '/vendedor/home'}}" method="get">
+                <button type="submit" class="btn btn-secondary">Ir a tu Página</button>
+            </form>
         </div>
-
-        <div class="col-md-6">
-            <label for="correo" class="form-label">Correo Electrónico</label>
-            <input type="email" id="correo" name="correo" class="form-control" th:value="${usuarioForm.correo}" required>
-        </div>
-
-        <div class="col-md-6">
-            <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-            <input type="date" id="fechaNacimiento" name="fechaNacimiento" class="form-control" th:value="${usuarioForm.fechaNacimiento}" required>
-        </div>
-
-        <div class="col-md-6">
-            <label for="direccion" class="form-label">Dirección</label>
-            <input type="text" id="direccion" name="direccion" class="form-control" th:value="${usuarioForm.direccion}" required>
-        </div>
-
-
-
-        <!-- Botones de acción -->
-        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        <<form th:action="@{${usuarioForm.rol == 'comprador' ? '/comprador/home' : '/vendedor/home'}}" method="get">
-            <button type="submit" class="btn btn-primary">Ir a tu Página</button>
-        </form>
     </form>
 </div>
 
