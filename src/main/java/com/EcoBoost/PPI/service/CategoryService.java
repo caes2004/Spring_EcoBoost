@@ -1,12 +1,12 @@
 package com.EcoBoost.PPI.service;
 
-import com.EcoBoost.PPI.entity.Category;
-import com.EcoBoost.PPI.entity.Rol;
-import com.EcoBoost.PPI.repository.CategoryRepository;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.EcoBoost.PPI.entity.Category;
+import com.EcoBoost.PPI.repository.CategoryRepository;
 
 @Service
 public class CategoryService {
@@ -14,7 +14,7 @@ public class CategoryService {
     CategoryRepository categoryRepository;
 
     public Category findByCategoria(String categoria) {
-        return categoryRepository.findByCategoria(categoria)
+        return categoryRepository.findByNombre(categoria)
                 .orElseThrow(() -> new RuntimeException("Categoria no encontrada: " + categoria));
     }
 

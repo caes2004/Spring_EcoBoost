@@ -1,17 +1,21 @@
 package com.EcoBoost.PPI.ecoBoostTests.integration;
 
-import com.EcoBoost.PPI.config.SecurityConfig;
-import com.EcoBoost.PPI.controller.HomeController;
-import com.EcoBoost.PPI.entity.Rol;
-import com.EcoBoost.PPI.entity.User;
-import com.EcoBoost.PPI.repository.UserRepository;
-import com.EcoBoost.PPI.service.ProductService;
-import com.EcoBoost.PPI.service.RolService;
-import com.EcoBoost.PPI.service.UserService;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,14 +26,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import com.EcoBoost.PPI.config.SecurityConfig;
+import com.EcoBoost.PPI.controller.HomeController;
+import com.EcoBoost.PPI.entity.Rol;
+import com.EcoBoost.PPI.entity.User;
+import com.EcoBoost.PPI.repository.UserRepository;
+import com.EcoBoost.PPI.service.ProductService;
+import com.EcoBoost.PPI.service.RolService;
+import com.EcoBoost.PPI.service.UserService;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(HomeController.class)
@@ -52,8 +64,9 @@ public class HomeControllerTest {
     @Test
     @DisplayName("Debe mostrar landing page con productos y usuarios con EcoPoints")
     public void testHome()throws Exception{
+        Long test=10L;//No deberia encontrar categoria
         //Simular los metodos de servicio
-        when(productService.listProductsDTOLanding()).thenReturn(Collections.emptyList());
+        when(productService.listProductsDTOLanding(test)).thenReturn(Collections.emptyList());
         when(userService.listUsersWithEcoPoints()).thenReturn(Collections.emptyList());
         //Validar la respuesta
         MvcResult result= mockMvc.perform(get("/"))

@@ -1,11 +1,12 @@
 package com.EcoBoost.PPI.repository;
 
-import com.EcoBoost.PPI.entity.Product;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.EcoBoost.PPI.entity.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
@@ -16,5 +17,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findByDocumentoVendedor(String documentoVendedor);
 
+    
+    List<Product>findByCategoriaId(Long categoriaId);
 
 }

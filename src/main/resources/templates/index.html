@@ -134,11 +134,13 @@
 </div>
 
 <!-- Botones de categoria  -->
+<!-- Botones de categoria -->
 <div>
-  <button class="buttonFormat fontHeaders">HOGAR</button>
-  <button class="buttonFormat fontHeaders">JUGUETES</button>
-  <button class="buttonFormat fontHeaders">ACCESORIOS</button>
-  <button class="buttonFormat fontHeaders">CONSTRUCCIÓN</button>
+  <th:block th:each="categoria : ${categorias}">
+    <a th:href="@{/(category=${categoria.id})}">
+      <button class="buttonFormat fontHeaders" th:text="${categoria.nombre}"></button>
+  </a>
+  </th:block>
 </div>
 
 <!-- OHHHHH FEETSSSSS DAMN! -->

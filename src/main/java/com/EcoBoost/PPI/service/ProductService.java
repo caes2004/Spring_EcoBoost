@@ -1,12 +1,13 @@
 package com.EcoBoost.PPI.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.EcoBoost.PPI.DTO.HomeProductDTO;
 import com.EcoBoost.PPI.entity.Product;
 import com.EcoBoost.PPI.repository.CategoryRepository;
 import com.EcoBoost.PPI.repository.ProductRepository;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ProductService {
@@ -29,21 +30,36 @@ public class ProductService {
             List<Product> products = productRepository.findAll();
         return products.stream().filter(p->p.getCantidadStock()>0).toList();
     }
-    public List<HomeProductDTO> listProductsDTOLanding() {
-        List<Product> products = productRepository.findAll();
-
-        return products.stream()
-                .filter(p->p.getCantidadStock()>0)
-                .map(product -> {
-            HomeProductDTO homeProductDTO = new HomeProductDTO();
-            homeProductDTO.setNombre(product.getNombre_producto());
-            homeProductDTO.setDescripcion(product.getDescripcion());
-            homeProductDTO.setPrecio(product.getValor());
-            homeProductDTO.setCategoria(product.getCategoria().getCategoria());
-            homeProductDTO.setImagen(product.getImagenProducto());
-            homeProductDTO.setCantidad(product.getCantidadStock());
-            return homeProductDTO;
-        }).toList();
+    public List<HomeProductDTO> listProductsDTOLanding(Long categoryId) {
+        
+        if(categoryId==null){
+            List<Product> products = productRepository.findAll();
+            return products.stream()
+                    .filter(p->p.getCantidadStock()>0)
+                    .map(product -> {
+                HomeProductDTO homeProductDTO = new HomeProductDTO();
+                homeProductDTO.setNombre(product.getNombre_producto());
+                homeProductDTO.setDescripcion(product.getDescripcion());
+                homeProductDTO.setPrecio(product.getValor());
+                homeProductDTO.setCategoria(product.getCategoria().getNombre());
+                homeProductDTO.setImagen(product.getImagenProducto());
+                homeProductDTO.setCantidad(product.getCantidadStock());
+                return homeProductDTO;
+            }).toList();
+        }
+        List<Product>productsFilter=productRepository.findByCategoriaId(categoryId);
+        return productsFilter.stream()
+        .filter(p->p.getCantidadStock()>0)
+        .map(product -> {
+                HomeProductDTO homeProductDTO = new HomeProductDTO();
+                homeProductDTO.setNombre(product.getNombre_producto());
+                homeProductDTO.setDescripcion(product.getDescripcion());
+                homeProductDTO.setPrecio(product.getValor());
+                homeProductDTO.setCategoria(product.getCategoria().getNombre());
+                homeProductDTO.setImagen(product.getImagenProducto());
+                homeProductDTO.setCantidad(product.getCantidadStock());
+                return homeProductDTO;
+            }).toList();
     }
     //Listar por documento del vendedor
     public List<Product> findByDocumentoVendedor(String documentoVendedor) {

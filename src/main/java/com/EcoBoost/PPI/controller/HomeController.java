@@ -1,17 +1,20 @@
 package com.EcoBoost.PPI.controller;
 
-import com.EcoBoost.PPI.entity.Rol;
-import com.EcoBoost.PPI.entity.User;
-import com.EcoBoost.PPI.service.RolService;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.ui.Model;
-import com.EcoBoost.PPI.service.ProductService;
-import com.EcoBoost.PPI.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.EcoBoost.PPI.entity.Rol;
+import com.EcoBoost.PPI.entity.User;
+import com.EcoBoost.PPI.service.CategoryService;
+import com.EcoBoost.PPI.service.ProductService;
+import com.EcoBoost.PPI.service.RolService;
+import com.EcoBoost.PPI.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 /*
 Controlador para manejo de endpoints publicos
@@ -22,19 +25,22 @@ public class HomeController {
 private final UserService userService;
 private final ProductService productService;
 private final RolService rolService;
+private final CategoryService categoryService;
 
 
-    public HomeController(UserService userService, RolService rolService, ProductService productService) {
+    public HomeController(UserService userService, RolService rolService, ProductService productService, CategoryService categoryService) {
         this.userService = userService;
         this.rolService = rolService;
         this.productService = productService;
+        this.categoryService=categoryService;
     }
 
 
-    @GetMapping("/") public String home(Model model){
-        model.addAttribute("productos", productService.listProductsDTOLanding());
+    @GetMapping("/") public String home(Model model,@RequestParam(value="category",required=false)Long categoryId){
+        model.addAttribute("productos", productService.listProductsDTOLanding(categoryId));
         model.addAttribute("usuariosEcoPoints", userService.listUsersWithEcoPoints());
-        return "home";
+        model.addAttribute("categorias",categoryService.listAll());
+        return "index";
     }
 
 
