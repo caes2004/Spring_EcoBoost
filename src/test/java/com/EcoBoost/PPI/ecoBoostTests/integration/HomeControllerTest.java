@@ -6,6 +6,8 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.EcoBoost.PPI.service.CategoryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -57,6 +59,8 @@ public class HomeControllerTest {
     @MockBean
     private ProductService productService;
     @MockBean
+    private CategoryService categoryService;
+    @MockBean
     private RolService rolService;
     @MockBean
     private UserRepository userRepository;
@@ -68,12 +72,14 @@ public class HomeControllerTest {
         //Simular los metodos de servicio
         when(productService.listProductsDTOLanding(test)).thenReturn(Collections.emptyList());
         when(userService.listUsersWithEcoPoints()).thenReturn(Collections.emptyList());
+        when(categoryService.listAll()).thenReturn(Collections.emptyList());//<-No hay categorias
         //Validar la respuesta
         MvcResult result= mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("home"))
+                .andExpect(view().name("index"))
                 .andExpect(model().attributeExists("productos"))
                 .andExpect(model().attributeExists("usuariosEcoPoints"))
+                .andExpect(model().attributeExists("categorias"))
                 .andReturn();
         // Imprimir información de la respuesta
         MockHttpServletResponse response = result.getResponse();

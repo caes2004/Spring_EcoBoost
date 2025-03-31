@@ -2,6 +2,7 @@ package com.EcoBoost.PPI.service;
 
 import java.util.List;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.EcoBoost.PPI.DTO.HomeProductDTO;
@@ -14,11 +15,9 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    private final CategoryRepository categoryRepository;
 
-    public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
+    public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
-        this.categoryRepository = categoryRepository;
     }
 
     //Listar por palabra clave del producto
@@ -31,35 +30,25 @@ public class ProductService {
         return products.stream().filter(p->p.getCantidadStock()>0).toList();
     }
     public List<HomeProductDTO> listProductsDTOLanding(Long categoryId) {
-        
-        if(categoryId==null){
-            List<Product> products = productRepository.findAll();
-            return products.stream()
-                    .filter(p->p.getCantidadStock()>0)
-                    .map(product -> {
-                HomeProductDTO homeProductDTO = new HomeProductDTO();
-                homeProductDTO.setNombre(product.getNombre_producto());
-                homeProductDTO.setDescripcion(product.getDescripcion());
-                homeProductDTO.setPrecio(product.getValor());
-                homeProductDTO.setCategoria(product.getCategoria().getNombre());
-                homeProductDTO.setImagen(product.getImagenProducto());
-                homeProductDTO.setCantidad(product.getCantidadStock());
-                return homeProductDTO;
-            }).toList();
-        }
-        List<Product>productsFilter=productRepository.findByCategoriaId(categoryId);
-        return productsFilter.stream()
-        .filter(p->p.getCantidadStock()>0)
-        .map(product -> {
-                HomeProductDTO homeProductDTO = new HomeProductDTO();
-                homeProductDTO.setNombre(product.getNombre_producto());
-                homeProductDTO.setDescripcion(product.getDescripcion());
-                homeProductDTO.setPrecio(product.getValor());
-                homeProductDTO.setCategoria(product.getCategoria().getNombre());
-                homeProductDTO.setImagen(product.getImagenProducto());
-                homeProductDTO.setCantidad(product.getCantidadStock());
-                return homeProductDTO;
-            }).toList();
+        List<Product> products = (categoryId == null)
+                ? productRepository.findAll()
+                : productRepository.findByCategoriaId(categoryId);
+
+        return products.stream()
+                .filter(p -> p.getCantidadStock() > 0)
+                .map(this::convertToDTO)
+                .toList();
+    }
+
+    private HomeProductDTO convertToDTO(Product product) {
+        return new HomeProductDTO(
+                product.getNombre_producto(),
+                product.getDescripcion(),
+                product.getValor(),
+                product.getCategoria().getNombre(),
+                product.getImagenProducto(),
+                product.getCantidadStock()
+        );
     }
     //Listar por documento del vendedor
     public List<Product> findByDocumentoVendedor(String documentoVendedor) {
@@ -76,13 +65,17 @@ public class ProductService {
     }
 
 
+    //Evaluar eliminar este método
     public Product get (Long id) {
 
         return productRepository.findById(id).get();
     }
 
-    public void delete (Long id) {
-
-        productRepository.deleteById(id);
+    public void delete(Long id) {
+        if (productRepository.existsById(id)) {
+            productRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Producto no encontrado con ID: " + id);
+        }
     }
 }

@@ -79,7 +79,7 @@
             <td><img th:src="@{/uploads/{nombreImagen}(nombreImagen=${producto.imagenProducto})}"
                      class="img-admin-size" alt="Imagen del Producto"loading="lazy"></td>
             <td th:text="${producto.cantidadStock}"></td>
-            <td th:text="${producto.categoria.categoria}"></td> <!-- Ajusta según tu entidad Category -->
+            <td th:text="${producto.categoria.nombre}"></td> <!-- Ajusta según tu entidad Category -->
             <td>
                 <a th:href="@{/editProduct/{id}(id=${producto.id})}" class="btn btn-sm btn-warning">Editar</a>
                 <a th:href="@{/deleteProduct/{id}(id=${producto.id})}" class="btn btn-sm btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?')">Eliminar</a>
