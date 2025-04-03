@@ -1,5 +1,21 @@
 package com.EcoBoost.PPI.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.EcoBoost.PPI.entity.Category;
 import com.EcoBoost.PPI.entity.Product;
 import com.EcoBoost.PPI.entity.Rol;
@@ -8,19 +24,8 @@ import com.EcoBoost.PPI.service.CategoryService;
 import com.EcoBoost.PPI.service.ProductService;
 import com.EcoBoost.PPI.service.RolService;
 import com.EcoBoost.PPI.service.UserService;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.util.List;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UserController {
@@ -80,7 +85,7 @@ public class UserController {
     public String editUser(@PathVariable("id") Long id, Model model) {
 
         User user = userService.get(id);
-        model.addAttribute("user", user);
+        model.addAttribute("userForm", user);
 
         List<Rol> roles = rolService.listAll();
         model.addAttribute("roles", roles);
@@ -88,29 +93,31 @@ public class UserController {
     }
 
     @PostMapping("/editUser/{id}")
-    public String updateUser(@PathVariable("id") Long id,
-                             @RequestParam("documento") String documento,
-                             @RequestParam("nombre") String nombre,
-                             @RequestParam("apellido") String apellido,
-                             @RequestParam("password") String password,
-                             @RequestParam("contacto") String contacto,
-                             @RequestParam("correo") String correo,
-                             @RequestParam("fechaNacimiento") LocalDate fechaNacimiento,
-                             @RequestParam("direccion") String direccion,
+    public String updateUser(@PathVariable("id") Long id, 
+                             @ModelAttribute User userForm, 
+                             @RequestParam(value = "password", required = false) String password,
                              @RequestParam("rolId") Long rolId) {
+    
         User user = userService.get(id);
-        Rol rol = rolService.findById(rolId);
-        user.setDocumento(documento);
-        user.setNombre(nombre);
-        user.setApellido(apellido);
-        user.setPassword(password);
-        user.setContacto(contacto);
-        user.setCorreo(correo);
-        user.setFechaNacimiento(fechaNacimiento);
-        user.setDireccion(direccion);
+    
+        user.setPassword(userForm.getPassword());
+        user.setDocumento(userForm.getDocumento());
+        user.setNombre(userForm.getNombre());
+        user.setApellido(userForm.getApellido());
+        user.setContacto(userForm.getContacto());
+        user.setCorreo(userForm.getCorreo());
+        user.setFechaNacimiento(userForm.getFechaNacimiento());
+        user.setDireccion(userForm.getDireccion());
+        
+    
+        
+        Rol rol = rolService.findById(userForm.getRol().getId());
         user.setRol(rol);
+    
+        
         userService.save(user);
-        return "redirect:/path/admin";
+    
+        return "redirect:/path/admin"; 
     }
 
     @GetMapping("/editProduct/{id}")
@@ -118,7 +125,7 @@ public class UserController {
         Product producto = productService.findById(id);
         model.addAttribute("producto", producto);
 
-        // Agregar categorías para seleccionar en el formulario
+        
         List<Category> categorias = categoryService.listAll();
         model.addAttribute("categorias", categorias);
 

@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension .class)
+@ExtendWith(MockitoExtension.class)
 public class ProductServiceTest {
     @InjectMocks
     private ProductService productService;
