@@ -31,4 +31,9 @@ public class CategoryService {
 
         return categoryRepository.save(category);
     }
+    public void delete(String nombre) {
+        Category category = categoryRepository.findByNombre(nombre)
+                .orElseThrow(() -> new RuntimeException("Categoria no encontrada: " + nombre));
+        categoryRepository.delete(category);
+    }
 }

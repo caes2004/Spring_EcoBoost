@@ -29,4 +29,9 @@ public class RolService {
     public List<Rol> listAll(){
         return rolRepository.findAll();
     }
+    public void delete(String nombre) {
+        Rol rol = rolRepository.findByNombre(nombre)
+                .orElseThrow(() -> new RuntimeException("Rol no encontrado: " + nombre));
+        rolRepository.delete(rol);
+    }
 }

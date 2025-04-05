@@ -162,9 +162,10 @@ public class ProductServiceTest {
     public void testDelete(){
         Long id=1L;
         System.out.println("----------Ejecutando Test: Eliminar producto----------");
+        when(productRepository.existsById(id)).thenReturn(true);
         productService.delete(id);
-
         verify(productRepository,times(1)).deleteById(id);
+        verify(productRepository,times(1)).existsById(id);
 
         System.out.println("----------Test finalizado----------");
         System.out.println("Producto eliminado con ID: "+id);

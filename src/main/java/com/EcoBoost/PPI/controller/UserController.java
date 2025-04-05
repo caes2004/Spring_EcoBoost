@@ -111,7 +111,7 @@ public class UserController {
         
     
         
-        Rol rol = rolService.findById(userForm.getRol().getId());
+        Rol rol = rolService.findById(rolId);
         user.setRol(rol);
     
         

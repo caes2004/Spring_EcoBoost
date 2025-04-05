@@ -110,10 +110,11 @@ public class CartServiceTest {
 
         Long idParameter=1L;
         System.out.println("----------Ejecutando test: Eliminar carrito----------");
-    
-        cartService.deleteCart(idParameter);
+        when(cartRepository.existsById(idParameter)).thenReturn(true);
+        cartService.eliminarCarrito(idParameter);
 
         verify(cartRepository,times(1)).deleteById(idParameter);
+        verify(cartRepository,times(1)).existsById(idParameter);
 
         System.out.println("----------Test finalizado----------");
         System.out.println("Carrito eliminado con ID: "+idParameter);
