@@ -8,6 +8,10 @@ import com.EcoBoost.PPI.repository.CartRepository;
 import com.EcoBoost.PPI.repository.ProductRepository;
 import com.EcoBoost.PPI.repository.SalesRepository;
 import com.EcoBoost.PPI.repository.UserRepository;
+import com.EcoBoost.PPI.service.Email.EmailServiceImpl;
+
+import jakarta.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +29,8 @@ public class SalesService {
     private UserRepository userRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private EmailServiceImpl emailService;
 
         @Transactional
         public Sales realizarVenta(Long userID) {
@@ -40,7 +46,14 @@ public class SalesService {
             if (carritos.isEmpty()) {
                 throw new IllegalArgumentException("El carrito está vacío, no se puede realizar la compra");
             }
-
+                try {
+                    
+                   emailService.enviarCorreoComprador(user);
+                } catch (MessagingException e) {
+                   
+                    e.printStackTrace();
+                    System.out.println("Error al enviar el email: "+e.getMessage());
+                }
 
             Sales sales = new Sales();
             sales.setUsuario(user);
