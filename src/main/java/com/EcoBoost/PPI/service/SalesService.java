@@ -1,23 +1,24 @@
 package com.EcoBoost.PPI.service;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.EcoBoost.PPI.entity.Cart;
 import com.EcoBoost.PPI.entity.Product;
 import com.EcoBoost.PPI.entity.Sales;
 import com.EcoBoost.PPI.entity.User;
 import com.EcoBoost.PPI.repository.CartRepository;
+import com.EcoBoost.PPI.repository.NotificationRepository;
 import com.EcoBoost.PPI.repository.ProductRepository;
 import com.EcoBoost.PPI.repository.SalesRepository;
 import com.EcoBoost.PPI.repository.UserRepository;
 import com.EcoBoost.PPI.service.Email.EmailServiceImpl;
 
 import jakarta.mail.MessagingException;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class SalesService {
@@ -30,7 +31,11 @@ public class SalesService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
+    private NotificationRepository notiRespository;
+    @Autowired
     private EmailServiceImpl emailService;
+    @Autowired
+    private NotificationService notiservice;
 
         @Transactional
         public Sales realizarVenta(Long userID) {
@@ -61,6 +66,7 @@ public class SalesService {
 
             int totalEcoPoints = 0;
             double total = 0;
+            double totalUnitario=0;
             for (Cart cart : carritos) {
                 total += cart.getCantidadProducto() * cart.getProducto().getValor();
                 cart.setSales(sales);
@@ -73,7 +79,12 @@ public class SalesService {
                 if (producto.getCantidadStock() < cantidadProducto) {
                     throw new IllegalArgumentException("No hay suficiente stock para el producto: " + producto.getNombre_producto());
                 }
-
+               //Generar Notificacion Vendedor
+                User vendedor=producto.getUsuario();
+                totalUnitario=cantidadProducto*producto.getValor();
+                notiservice.createNotification(producto, vendedor, cantidadProducto, totalUnitario);
+                
+                //Actualizar datos producto
                 totalEcoPoints += cantidadProducto;
                 producto.setCantidadStock(producto.getCantidadStock() - cantidadProducto);
                 productRepository.save(producto);

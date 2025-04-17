@@ -3,6 +3,9 @@ import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
 
 import com.EcoBoost.PPI.entity.Cart;
 import com.EcoBoost.PPI.entity.User;
@@ -10,10 +13,6 @@ import com.EcoBoost.PPI.service.CartService;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Component;
 
 
 @Component
@@ -67,7 +66,7 @@ public class EmailServiceImpl implements EmailService {
     helper.setTo(gmailDestino);
     helper.setSubject(subject);
     helper.setText(htmlContent.toString(), true); // true indica que el contenido es HTML
-    File logo = new File("C:\\P\\ecoBoost\\Spring_EcoBoost\\src\\main\\resources\\static\\images\\login\\EcoBoost_Negativo.png");
+    File logo = new File("src\\main\\resources\\static\\images\\login\\EcoBoost_Negativo.png");
     helper.addAttachment("ecoLogoOriginal.png", logo);
     
     emailSender.send(message);

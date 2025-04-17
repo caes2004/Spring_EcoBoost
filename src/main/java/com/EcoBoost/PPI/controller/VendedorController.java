@@ -1,28 +1,30 @@
 package com.EcoBoost.PPI.controller;
 
-import org.springframework.ui.Model;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
-import com.EcoBoost.PPI.entity.Category;
-import com.EcoBoost.PPI.entity.Product;
-import com.EcoBoost.PPI.entity.User;
-import com.EcoBoost.PPI.service.CategoryService;
-import com.EcoBoost.PPI.service.ProductService;
-import com.EcoBoost.PPI.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import com.EcoBoost.PPI.entity.Category;
+import com.EcoBoost.PPI.entity.Product;
+import com.EcoBoost.PPI.entity.User;
+import com.EcoBoost.PPI.entity.event.Notification;
+import com.EcoBoost.PPI.service.CategoryService;
+import com.EcoBoost.PPI.service.NotificationService;
+import com.EcoBoost.PPI.service.ProductService;
+import com.EcoBoost.PPI.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 
@@ -33,6 +35,8 @@ public class VendedorController {
     private UserService userService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private NotificationService notiService;
 
     @GetMapping ("/vendedor/home")String vendedor_home(){
 
@@ -139,6 +143,13 @@ public class VendedorController {
         productService.save(producto);
 
         return "redirect:/productos/mis-productos";
+    }
+    @GetMapping("/vendedor/notificaciones")
+    public String notificacionVendedor(HttpSession httpSession,Model model){
+        User usuarioLogeado = (User) httpSession.getAttribute("usuarioLogeado");
+        List<Notification> notificaciones=notiService.notiByVendedor(usuarioLogeado);
+        model.addAttribute("notificaciones", notificaciones);
+        return "notificaciones";
     }
 
     // Eliminar un producto
