@@ -23,7 +23,7 @@ public class Notification {
     private Long id_producto;
 
     @Column
-    private String documento_vendedor;
+    private String documentoVendedor;
 
     @Column
     private String nombre_producto;

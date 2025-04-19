@@ -28,16 +28,35 @@
 
             <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
         </span>
+        <div style="position: relative; display: inline-block;background: transparent; ">
+            <button class="icono-notificacion" onclick="location.href='/vendedor/notificaciones'" style="background: transparent; border: none; padding: 0;">
 
+                <!--  Si hay notificaciones NO leídas: ícono con campana y alertas -->
+                <svg  th:if="${hayNotificacionesNoLeidas}" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFD700" class="size-6 text-yellow-500">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75
+              a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0
+              m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                </svg>
+
+                <!--Si todas las notificaciones están leídas: ícono simple -->
+                <svg th:if="${!hayNotificacionesNoLeidas}" xmlns="http://www.w3.org/2000/svg" fill="none"
+                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75
+              a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0
+              m5.714 0a3 3 0 1 1-5.714 0" />
+                </svg>
+
+            </button>
+
+        </div>
         <img id="ecoLogoHome" src="/images/homepage/EcoLogoSinLetra.png" alt="Logo EcoBoost" width="50" height="50">
         <h1 id="textLogoHome" class="fontHeaders">ECOBOOST</h1>
 
         <div class="elementosDerecha">
 
-            <!--  <a href="/vendedor/home" class="btn btn-light" id="add-product-btn">
-                    <img src="/images/icons/add.jpg" alt="Añadir" style="width: 20px; height: 20px; margin-right: 8px;">
-                    Añadir Producto
-                </a> -->
 
             <button id="add-product-btn" onclick="location.href='/vendedor/home'" alt="Añadir">
                 <i class="fa-solid fa-circle-plus"></i>

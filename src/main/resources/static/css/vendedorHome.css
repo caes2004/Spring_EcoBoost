@@ -145,14 +145,14 @@ body {
 #userIcon {
     width: 55px;
     height: auto;
-    margin-right: 10px;
+
 }
 
 #userIcon {
 
     width: 100px;
     height: 100px;
-    margin-left: 15px;
+    margin-left: 30px;
     border-radius: 50%;
     border: none; /* Eliminar el borde */
     background-color: #3b5704;
@@ -162,6 +162,27 @@ body {
     transition: all 0.3s ease-in-out; /* Aplica una animación suave al botón */
 
 }
+.icono-notificacion {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    position: relative;
+}
+
+.icono-notificacion svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease;
+}
+
+.icono-notificacion:hover svg {
+    transform: scale(1.2);
+
+}
+
 
 #userIcon i{
     font-size: 250%; /* Aumenta el tamaño del icono */

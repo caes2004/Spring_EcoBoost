@@ -55,6 +55,28 @@
     text-decoration: none;
     color: white;
 }
+icono-notificacion {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    right:  50px;
+    position: absolute;
+
+}
+
+.icono-notificacion svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s ease;
+    background: transparent;
+    color: white;
+}
+
+.icono-notificacion:hover svg {
+    transform: scale(1.2);
+}
 
 .mascoticaVendedor {
 

@@ -5,7 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.EcoBoost.PPI.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +39,16 @@ public class VendedorController {
     private CategoryService categoryService;
     @Autowired
     private NotificationService notiService;
+    @Autowired
+    private NotificationRepository notificationRepository;
 
-    @GetMapping ("/vendedor/home")String vendedor_home(){
+
+    @GetMapping ("/vendedor/home")String vendedor_home(Model model,HttpSession session){
+
+        // Obtener el usuario en sesión
+        User usuarioLogeado = (User) session.getAttribute("usuarioLogeado");
+        boolean hayNoLeidas= notiService.notiNoLeida(usuarioLogeado);
+        model.addAttribute("hayNotificacionesNoLeidas",hayNoLeidas);
 
         return "VendedorHome";
     }
@@ -95,6 +105,9 @@ public class VendedorController {
         // Obtener los productos del usuario en sesión
         List<Product> productos = productService.findByDocumentoVendedor(documentoVendedor);
 
+        boolean hayNoLeidas= notiService.notiNoLeida(usuarioLogeado);
+        model.addAttribute("hayNotificacionesNoLeidas",hayNoLeidas);
+
         // Pasar los productos al modelo
         model.addAttribute("productos", productos);
 
@@ -148,6 +161,8 @@ public class VendedorController {
     public String notificacionVendedor(HttpSession httpSession,Model model){
         User usuarioLogeado = (User) httpSession.getAttribute("usuarioLogeado");
         List<Notification> notificaciones=notiService.notiByVendedor(usuarioLogeado);
+        notificaciones.forEach(n->{n.setChecked(true);});
+        notificationRepository .saveAll(notificaciones);
         model.addAttribute("notificaciones", notificaciones);
         return "notificaciones";
     }

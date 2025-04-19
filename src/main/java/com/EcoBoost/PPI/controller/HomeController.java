@@ -1,5 +1,6 @@
 package com.EcoBoost.PPI.controller;
 
+import com.EcoBoost.PPI.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +10,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.EcoBoost.PPI.entity.Rol;
 import com.EcoBoost.PPI.entity.User;
-import com.EcoBoost.PPI.service.CategoryService;
-import com.EcoBoost.PPI.service.ProductService;
-import com.EcoBoost.PPI.service.RolService;
-import com.EcoBoost.PPI.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -28,7 +25,7 @@ private final RolService rolService;
 private final CategoryService categoryService;
 
 
-    public HomeController(UserService userService, RolService rolService, ProductService productService, CategoryService categoryService) {
+    public HomeController(UserService userService, RolService rolService, ProductService productService, CategoryService categoryService)  {
         this.userService = userService;
         this.rolService = rolService;
         this.productService = productService;

@@ -15,9 +15,47 @@
 </div>
 
 <div class="perfil-vendedor">
-    <button  id="userIcon" onclick="location.href='/perfil'"> <i class="fa-solid fa-user" style="color: #ffffff;"></i></button>
-    <h2 id="vendedor" class="fontHeaders"><span th:text="${session.usuarioLogeado.nombre}">Vendedor</span></h2>
-    <p id="documento" class="fontMiniMessages"><span th:text="${session.usuarioLogeado.documento}">Documento</span></p>
+    <div class="iconos-superiores">
+        <!-- Icono de usuario -->
+        <button id="userIcon" onclick="location.href='/perfil'">
+            <i class="fa-solid fa-user" style="color: #ffffff;"></i>
+        </button>
+
+        <!-- Icono de notificaciones -->
+        <div style="position: relative; display: inline-block;">
+            <button class="icono-notificacion" onclick="location.href='/vendedor/notificaciones'">
+
+
+
+                    <!--  Si hay notificaciones NO leídas: ícono con campana y alertas -->
+                    <svg th:if="${hayNotificacionesNoLeidas}" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFC107" class="size-6 text-yellow-500">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75
+              a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0
+              m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" />
+                    </svg>
+
+                    <!--Si todas las notificaciones están leídas: ícono simple -->
+                    <svg th:if="${!hayNotificacionesNoLeidas}" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75
+              a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0
+              m5.714 0a3 3 0 1 1-5.714 0" />
+                    </svg>
+
+                </button>
+
+        </div>
+    </div>
+
+    <h2 id="vendedor" class="fontHeaders">
+        <span th:text="${session.usuarioLogeado.nombre}">Vendedor</span>
+    </h2>
+    <p id="documento" class="fontMiniMessages">
+        <span th:text="${session.usuarioLogeado.documento}">Documento</span>
+    </p>
 
     <div class="botones-">
         <a href="/perfil" class="modificar-perfil">Modificar perfil</a>
@@ -88,7 +126,7 @@
         const form = document.querySelector("form");
 
         // Mostrar mensaje de bienvenida
-        if (!localStorage.getItem("bienvenidaMostrada")) {
+        if (!sessionStorage.getItem("bienvenidaMostrada")) {
             const nombreVendedor = document.getElementById("vendedor").innerText;
             Swal.fire({
                 imageUrl: "/images/login/mascota_2.png",
@@ -100,7 +138,7 @@
             });
 
             // Guardar en localStorage que ya se mostró el mensaje
-            localStorage.setItem("bienvenidaMostrada", "true");
+            sessionStorage.setItem("bienvenidaMostrada", "true");
         }
 
 
@@ -140,5 +178,31 @@
         });
     });
 </script>
+<script th:inline="javascript">
+
+    let tieneNotificacion = /*[[${hayNotificacionesNoLeidas}]]*/ true;
+
+    if (tieneNotificacion) {
+        Swal.fire({
+            icon: 'info',
+            title: '¡Tienes nuevas notificaciones!',
+            text: 'Revisa tu bandeja de notificaciones para ver los últimos avisos.',
+            confirmButtonText: 'Ir ahora',
+            showCancelButton: true,
+            cancelButtonText: 'Después',
+            imageUrl: '/images/login/mascota_2.png',
+            imageWidth: 200,
+            imageHeight: 220,
+            imageAlt: 'Mascota EcoBoost',
+            backdrop: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                window.location.href = "/vendedor/notificaciones";
+            }
+        });
+    }
+</script>
+
 
 </html>

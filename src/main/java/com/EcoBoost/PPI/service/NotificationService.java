@@ -20,7 +20,7 @@ public class NotificationService {
     public void createNotification(Product producto,User vendedor,int cantidadProducto,Double totalUnitario){
 
         Notification noti=new Notification();
-        noti.setDocumento_vendedor(vendedor.getDocumento());
+        noti.setDocumentoVendedor(vendedor.getDocumento());
         noti.setId_producto(producto.getId());
         noti.setNombre_producto(producto.getNombre_producto());
         noti.setCantidad_vendida(cantidadProducto);
@@ -36,8 +36,15 @@ public class NotificationService {
         List<Notification> noti=notiRepo.findAll();
         
         return noti.stream()
-        .filter(p -> p.getDocumento_vendedor().equals(usuario.getDocumento()))
+        .filter(p -> p.getDocumentoVendedor().equals(usuario.getDocumento()))
         .collect(Collectors.toList());
+    }
+
+    public Boolean notiNoLeida(User usuario){
+
+        List<Notification>noti=notiRepo.findAllByDocumentoVendedor(usuario.getDocumento());
+
+        return noti.stream().anyMatch(n->!n.getChecked());
     }
 
 }
