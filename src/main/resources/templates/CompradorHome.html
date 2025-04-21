@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/compradorHome.css">
     <script src="/EcoBoost/darkMode.js" defer></script>
     <script src="/JavaScript/darkMode.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -24,6 +25,9 @@
             <h1 id="userDefault" class="fontHeaders ms-2" th:text="${session.usuarioLogeado.nombre}">Usuario</h1>
         </span>
 
+        <a href="/comprador/historial" class="btn btn-outline-light btn-sm" title="Ver historial de compras">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+        </a>  
     <img id="ecoLogoHome" src="/images/homepage/EcoLogoSinLetra.png" alt="Logo EcoBoost" width="50" height="50">
     <h1 id="textLogoHome" class="fontHeaders">ECOBOOST</h1>
 
@@ -105,6 +109,22 @@
 <script>
     function confirmarLogOut() {
         return confirm("¿Estás seguro de que deseas cerrar sesión?");
+    }
+</script>
+<!--Script bienvenida comprador-->
+<script>  
+    if (!sessionStorage.getItem("bienvenidaMostradaComprador")) {
+    const nombreComprador = document.getElementById("userDefault").innerText;
+    Swal.fire({
+        imageUrl: "/images/login/mascota_2.png",
+        imageWidth: 300,
+        imageHeight: 350,
+        title: `¡Bienvenido ${nombreComprador}!`,
+        text: 'Aquí podrás realizar compras de productos ecológicos de manera segura.',
+        showConfirmButton: true
+    });
+    // Guardar en localStorage que ya se mostró el mensaje
+    sessionStorage.setItem("bienvenidaMostradaComprador", "true");
     }
 </script>
 </body>

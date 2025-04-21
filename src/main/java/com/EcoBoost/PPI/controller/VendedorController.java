@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.EcoBoost.PPI.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import com.EcoBoost.PPI.entity.event.Notification;
 import com.EcoBoost.PPI.service.CategoryService;
 import com.EcoBoost.PPI.service.NotificationService;
 import com.EcoBoost.PPI.service.ProductService;
-import com.EcoBoost.PPI.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -33,8 +31,6 @@ import jakarta.servlet.http.HttpSession;
 public class VendedorController {
     @Autowired
     ProductService productService;
-    @Autowired
-    private UserService userService;
     @Autowired
     private CategoryService categoryService;
     @Autowired

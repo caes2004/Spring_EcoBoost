@@ -126,7 +126,7 @@
         const form = document.querySelector("form");
 
         // Mostrar mensaje de bienvenida
-        if (!sessionStorage.getItem("bienvenidaMostrada")) {
+        if (!sessionStorage.getItem("bienvenidaMostradaVendedor")) {
             const nombreVendedor = document.getElementById("vendedor").innerText;
             Swal.fire({
                 imageUrl: "/images/login/mascota_2.png",
@@ -138,7 +138,7 @@
             });
 
             // Guardar en localStorage que ya se mostró el mensaje
-            sessionStorage.setItem("bienvenidaMostrada", "true");
+            sessionStorage.setItem("bienvenidaMostradaVendedor", "true");
         }
 
 

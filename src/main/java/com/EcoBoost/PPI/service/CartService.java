@@ -1,6 +1,8 @@
 package com.EcoBoost.PPI.service;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,18 @@ public class CartService {
             return cartRepository.findAllByCompradorId(idComprador);
         }
         return cartRepository.findAll();
+    }
+    public List<Cart> listAllActiveCarts(Long idComprador){
+        List<Cart>allCarts=cartRepository.findAllByCompradorId(idComprador);
+
+        
+        return allCarts.stream().filter(p->p.getActivo()==true).collect(Collectors.toList());
+    }
+    public List<Cart>listAllProductsBysSalesId(Long id){
+
+        List<Cart>products=cartRepository.findAllBySalesId(id);
+
+        return products;
     }
 
     public void save(Cart cart) {

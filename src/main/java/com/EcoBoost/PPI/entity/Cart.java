@@ -36,4 +36,7 @@ public class Cart {
 
     @Column(name = "imagen_producto")
     private String imagenProducto;
+
+    @Column(name="activo")
+    private Boolean activo=true;
 }

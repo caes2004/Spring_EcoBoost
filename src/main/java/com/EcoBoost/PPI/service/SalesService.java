@@ -12,7 +12,6 @@ import com.EcoBoost.PPI.entity.Product;
 import com.EcoBoost.PPI.entity.Sales;
 import com.EcoBoost.PPI.entity.User;
 import com.EcoBoost.PPI.repository.CartRepository;
-import com.EcoBoost.PPI.repository.NotificationRepository;
 import com.EcoBoost.PPI.repository.ProductRepository;
 import com.EcoBoost.PPI.repository.SalesRepository;
 import com.EcoBoost.PPI.repository.UserRepository;
@@ -30,8 +29,6 @@ public class SalesService {
     private UserRepository userRepository;
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private NotificationRepository notiRespository;
     @Autowired
     private EmailServiceImpl emailService;
     @Autowired
@@ -88,6 +85,7 @@ public class SalesService {
                 totalEcoPoints += cantidadProducto;
                 producto.setCantidadStock(producto.getCantidadStock() - cantidadProducto);
                 productRepository.save(producto);
+                cart.setActivo(false);
             }
             sales.setTotal(total);
             sales.setCarrito(carritos);
@@ -96,12 +94,20 @@ public class SalesService {
             userRepository.save(user);
 
 
-            cartRepository.deleteByCompradorId(userID);
+            
 
 
 
             return sales;
         }
+
+        public List<Sales>historialCompras(Long id){
+
+            List<Sales>historial=salesRepository.findHistorialByUsuarioId(id);
+            
+            return historial;
+        }
+
     }
 
 

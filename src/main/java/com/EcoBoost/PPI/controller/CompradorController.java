@@ -2,11 +2,11 @@ package com.EcoBoost.PPI.controller;
 
 import com.EcoBoost.PPI.entity.Cart;
 import com.EcoBoost.PPI.entity.Product;
-import com.EcoBoost.PPI.entity.Rol;
+import com.EcoBoost.PPI.entity.Sales;
 import com.EcoBoost.PPI.entity.User;
 import com.EcoBoost.PPI.service.CartService;
 import com.EcoBoost.PPI.service.ProductService;
-import com.EcoBoost.PPI.service.UserService;
+import com.EcoBoost.PPI.service.SalesService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +26,8 @@ public class CompradorController {
     ProductService productService;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private SalesService salesService;
 
     @GetMapping("/comprador/home")String compradorHome(@RequestParam(value = "palabraClave", required = false) String palabraClave, Model model,HttpSession session) {
 
@@ -74,7 +76,7 @@ public class CompradorController {
             return "redirect:/login";
         }
 
-        List<Cart> carritos= cartService.listAll(comprador.getId());
+        List<Cart> carritos= cartService.listAllActiveCarts(comprador.getId());
         double granTotal = carritos.stream()
                 .mapToDouble(cart -> cart.getProducto().getValor() * cart.getCantidadProducto())
                 .sum();
@@ -106,5 +108,37 @@ public class CompradorController {
         model.addAttribute("usuario", usuario);
         return "validate";
     }
+
+    @GetMapping("/comprador/historial")
+    public String historial(HttpSession session, Model model) {
+       
+        User usuario=(User)session.getAttribute("usuarioLogeado");
+
+        List<Sales>historialSales=salesService.historialCompras(usuario.getId());
+        model.addAttribute("historial", historialSales);
+        model.addAttribute("usuario", usuario);
+        return  "historial";
+
+    }
+    @GetMapping("/comprador/historial/factura")
+    public String historialFactura(@RequestParam ("compraId")long compraId,Model model,HttpSession session) {
+        List<Cart> productos = cartService.listAllProductsBysSalesId(compraId);
+        User user = (User) session.getAttribute("usuarioLogeado");
+
+    int totalCompra = 0;
+    for (Cart item : productos) {
+        Product producto = item.getProducto(); 
+        int cantidad = item.getCantidadProducto();     
+        Double precio = producto.getValor();      
+        totalCompra += cantidad * precio;
+    }
+
+        model.addAttribute("productos", productos);
+        model.addAttribute("totalCompra", totalCompra);
+        model.addAttribute("usuario", user);
+        return "detalles-productos";
+    }
+    
+    
 
 }
