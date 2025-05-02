@@ -14,25 +14,15 @@ body::before {
     z-index: -1;
 }
 
-.img-admin-size {
-    width: 80px;  /* Ajusta según tus necesidades */
-    height: auto;
-    object-fit: contain; /* Para asegurar que la imagen se ajuste sin distorsionarse */
-}
-.thead-green {
-    background-color: green;
-    color: white; /* Color del texto */
-    opacity:  0.7; /* ← Controla la transparencia */
-}
-
-
-.thead-green2 {
-    background-color: green;
-    color: white; /* Color del texto */
+.form-control{
     opacity:  0.7; /* ← Controla la transparencia */
 
 }
 
+.form-control:hover{
+
+    border: 2px solid black !important;
+}
 
 
 /* Nota: Se pone en todos !important para darle prioridad frente a boostrap*/
@@ -42,24 +32,21 @@ body::before {
     border-color: #28a745 !important;
     color: white !important;
     transition: all 0.3s ease-in-out!important; /* Aplica una animación suave al botón */
+
 }
 
-.btn-warning{
-    background-color: #28a745 !important; /* Verde como ejemplo */
-    border-color: #28a745 !important;
+
+.btn-secondary{
+
+    background-color: #ce0b0b !important; /* Verde como ejemplo */
+    border-color: #ce0b0b !important;
     color: white !important;
     transition: all 0.3s ease-in-out!important; /* Aplica una animación suave al botón */
+
 }
 
-.btn-primary:hover{
-    cursor: pointer !important;
-    color: white !important;
-    transform: scale(1.1) !important;
-    border: 2px solid black !important;
-}
-
-.btn-warning:hover,
-.btn-danger:hover{
+.btn-primary:hover,
+.btn-secondary:hover{
     cursor: pointer !important;
     color: white !important;
     transform: scale(1.1) !important;
