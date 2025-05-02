@@ -8,7 +8,12 @@ import com.EcoBoost.PPI.repository.CartRepository;
 import com.EcoBoost.PPI.repository.ProductRepository;
 import com.EcoBoost.PPI.repository.SalesRepository;
 import com.EcoBoost.PPI.repository.UserRepository;
+import com.EcoBoost.PPI.service.NotificationService;
 import com.EcoBoost.PPI.service.SalesService;
+import com.EcoBoost.PPI.service.Email.EmailServiceImpl;
+
+import jakarta.mail.MessagingException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,6 +28,9 @@ import java.util.Optional;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,6 +46,10 @@ public class SalesServiceTest {
     private UserRepository userRepository;
     @Mock
     private ProductRepository productRepository;
+    @Mock
+    private EmailServiceImpl emailService;
+    @Mock
+    private NotificationService notiservice;
 
     private Sales sales;
 
@@ -49,12 +61,14 @@ public class SalesServiceTest {
 
         Product productTest1 = new Product();
         productTest1.setId(101L);
+        productTest1.setUsuario(userTest);
         productTest1.setNombre_producto(productName1);
         productTest1.setValor(50.0);
         productTest1.setCantidadStock(10);
 
         Product productTest2 = new Product();
         productTest2.setId(102L);
+        productTest2.setUsuario(userTest);
         productTest2.setNombre_producto(productName2);
         productTest2.setValor(50.0);
         productTest2.setCantidadStock(10);
@@ -90,7 +104,7 @@ public class SalesServiceTest {
 
     @Test
     @DisplayName("Test realizar Venta usuario y carrito no nulos")
-    public void testRealizarVenta() {
+    public void testRealizarVenta() throws MessagingException {
         Long userId = 1L;
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(sales.getUsuario()));
@@ -98,7 +112,8 @@ public class SalesServiceTest {
         when(productRepository.save(any(Product.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(salesRepository.save(any(Sales.class))).thenAnswer(invocation -> invocation.getArgument(0));
         when(userRepository.save(any(User.class))).thenAnswer(invocation -> invocation.getArgument(0));
-        doNothing().when(cartRepository).deleteByCompradorId(userId);
+        doNothing().when(emailService).enviarCorreoComprador(any(User.class));
+        doNothing().when(notiservice).createNotification(any(Product.class), any(User.class), anyInt(), anyDouble());
 
         var resultado = salesService.realizarVenta(userId);
 
@@ -113,8 +128,8 @@ public class SalesServiceTest {
         verify(productRepository, times(2)).save(any(Product.class));
         verify(userRepository).save(any(User.class));
         verify(salesRepository).save(any(Sales.class));
-        verify(cartRepository).deleteByCompradorId(userId);
-
+        verify(emailService, times(1)).enviarCorreoComprador(any(User.class));
+        verify(notiservice, times(2)).createNotification(any(Product.class), any(User.class), anyInt(), anyDouble());
         System.out.println("----------Test finalizado----------");
     }
 

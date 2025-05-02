@@ -9,4 +9,5 @@ import java.util.List;
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
     List<Notification> findAllByDocumentoVendedor(String documentoVendedor);
+    Boolean existsByDocumentoVendedorAndCheckedFalse(String documentoVendedor);
 }

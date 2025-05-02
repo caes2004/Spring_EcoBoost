@@ -90,7 +90,7 @@
                     <p class="card-text"><strong>Precio:</strong> $<span th:text="${producto.valor}">0.00</span></p>
                     <form method="post" action="/comprador/agregar-al-carrito">
                         <input type="hidden" name="productoId" th:value="${producto.id}" />
-                        <input type="number" name="cantidad" min="1" value="1" class="form-control" />
+                        <input type="number" name="cantidad" min="1" value="1" class="form-control" required />
                         <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
                     </form>
 

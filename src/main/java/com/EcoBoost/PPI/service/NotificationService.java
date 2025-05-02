@@ -2,7 +2,6 @@ package com.EcoBoost.PPI.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,18 +32,15 @@ public class NotificationService {
 
     public List<Notification> notiByVendedor(User usuario){
 
-        List<Notification> noti=notiRepo.findAll();
-        
-        return noti.stream()
-        .filter(p -> p.getDocumentoVendedor().equals(usuario.getDocumento()))
-        .collect(Collectors.toList());
+        return notiRepo.findAllByDocumentoVendedor(usuario.getDocumento());
     }
 
     public Boolean notiNoLeida(User usuario){
 
-        List<Notification>noti=notiRepo.findAllByDocumentoVendedor(usuario.getDocumento());
-
-        return noti.stream().anyMatch(n->!n.getChecked());
+        //List<Notification>noti=notiRepo.findAllByDocumentoVendedor(usuario.getDocumento());
+        
+        //return noti.stream().anyMatch(n->!n.getChecked());
+        return notiRepo.existsByDocumentoVendedorAndCheckedFalse(usuario.getDocumento());
     }
 
 }
