@@ -16,6 +16,7 @@ public class PpiEcoBoostApplication {
 		env.get("DB_PASSWORD");
 		env.get("SPRING_SEC_USER");
 		env.get("SPRING_SEC_PASSWORD");
+		System.setProperty("SPRING_SEC_PASSWORD", env.get("SPRING_SEC_PASSWORD"));
 		SpringApplication.run(PpiEcoBoostApplication.class, args);
 	}
 

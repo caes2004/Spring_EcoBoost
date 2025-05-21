@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.EcoBoost.PPI.service.CategoryService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -25,7 +24,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -45,7 +43,7 @@ import com.EcoBoost.PPI.service.ProductService;
 import com.EcoBoost.PPI.service.RolService;
 import com.EcoBoost.PPI.service.UserService;
 
-@ExtendWith(SpringExtension.class)
+
 @WebMvcTest(HomeController.class)
 @Import(SecurityConfig.class)
 @AutoConfigureMockMvc(addFilters = false)//Para evitar problemas con los filtros de seguridad de Spring Security
